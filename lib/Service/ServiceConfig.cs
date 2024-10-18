@@ -23,9 +23,6 @@ public class ServiceConfig{
   public void ServiceName(string name){
     Name = name;
   }
-  public void SetSerializationHandler(ISerialization serialization){
-    Serialization = serialization;
-  }
 
 
   //PRIVATE
@@ -41,7 +38,6 @@ public class ServiceConfig{
   string Name { get; set; } = string.Empty;
   byte ServiceType { get; set; } = 0x00;
   byte[] ServiceMessageId = new byte[1]; //- gives a range of 0-255 used by the  server to remove some overhead.
-  ISerialization? Serialization {get; set;} = null;
 
   //- Const indexing of bits
   const int const_configSize = 10;

@@ -2,16 +2,6 @@
 
 public abstract class AService
 {
-
-  protected ISerialization Serialization {get; private set;}
-
-
-
-
-  
-
-
-
   /// <summary>
   /// When the Service is called this will be called from X
   /// </summary>
