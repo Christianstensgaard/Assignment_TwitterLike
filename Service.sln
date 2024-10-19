@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitToolbox", "lib\BitToolbo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{E00DB817-5196-48A2-9C5F-C2B27F0B8E3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService", "services\AccountService\AccountService.csproj", "{53C2B677-54A0-49A5-99F2-704C0E555DBB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageHandler", "lib\PackageHandler\PackageHandler.csproj", "{C96D99A9-B419-49C9-9DA3-CD586F7CDD83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{8539DE3E-DD28-4D45-9A68-E8BADAFE3EDB}"
