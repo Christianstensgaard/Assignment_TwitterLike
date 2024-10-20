@@ -1,65 +1,34 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Service;
-using Service.Tools;
+﻿
+using System.Net;
+using System.Net.Sockets;
+using Service.Controllers;
 
-byte[] stream = new byte[1024];
+TcpListener boilerSocket = new TcpListener(IPAddress.Parse("127.0.0.1"), 20200);
+boilerSocket.Start();
+new Thread(ServerSocket).Start();
 
-
-AccountModel target = new AccountModel(){
-  AccountName = "Admin",
-  Password    = "Admin",
-};
-
-stream = target.Serialize();
-
-
-
-AccountModel result = AccountModel.UnPack(stream);
+ConnectionController clientConnection = new ConnectionController("127.0.0.1", 20200);
+clientConnection.Start();
+System.Console.WriteLine(clientConnection.Connected);
 
 
 
 
-System.Console.WriteLine(result.AccountName);
-System.Console.WriteLine(result.Password);
 
 
 
-
-class AccountModel : ISerialization
-{
-  public static AccountModel UnPack(byte[] stream){
-    using MemoryStream Stream = new MemoryStream(stream);
-    using BinaryReader reader = new BinaryReader(Stream);
-
-    return new AccountModel(){
-      AccountName = reader.ReadString(),
-      Password    = reader.ReadString()
-    };
-  }
-
-
-  public string AccountName { get; set; }
-  public string Password { get; set; }
-
-
-
-    public byte[] Serialize()
-    {
-      using MemoryStream stream = new MemoryStream();
-      using BinaryWriter write = new BinaryWriter(stream);
-
-      write.Write(AccountName);
-      write.Write(Password);
-
-      return stream.GetBuffer();
-    }
-
-    public void Unserialize(byte[] raw)
-    {
-        throw new NotImplementedException();
-    }
-
+while(true){
+  Thread.Sleep(2000);
 }
 
 
 
+//- ServerSocket Thread function.
+void ServerSocket(){
+  while(true){
+    if(boilerSocket.Pending())
+      System.Console.WriteLine("Connection is waiting!");
+    else Thread.Sleep(200);
+    System.Console.WriteLine("ServerSocker()");
+  }
+}

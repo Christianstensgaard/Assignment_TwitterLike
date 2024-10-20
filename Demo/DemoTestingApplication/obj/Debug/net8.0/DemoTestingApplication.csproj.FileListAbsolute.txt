@@ -18,3 +18,4 @@ C:\git\Assignment_TwitterLike\Demo\DemoTestingApplication\obj\Debug\net8.0\refin
 C:\git\Assignment_TwitterLike\Demo\DemoTestingApplication\obj\Debug\net8.0\DemoTestingApplication.pdb
 C:\git\Assignment_TwitterLike\Demo\DemoTestingApplication\obj\Debug\net8.0\DemoTestingApplication.genruntimeconfig.cache
 C:\git\Assignment_TwitterLike\Demo\DemoTestingApplication\obj\Debug\net8.0\ref\DemoTestingApplication.dll
+C:\git\Assignment_TwitterLike\Demo\DemoTestingApplication\obj\Debug\net8.0\DemoTestingApplication.sourcelink.json
