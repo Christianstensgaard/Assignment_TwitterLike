@@ -1,33 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj": {}
+    "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj": {}
   },
   "projects": {
-    "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj": {
+    "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
+        "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
         "projectName": "DemoTestingApplication",
-        "projectPath": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
-        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\obj\\",
+        "projectPath": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
+        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "outputPath": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
-                "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
+              "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+                "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
               }
             }
           }
@@ -62,26 +65,29 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
+    "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+        "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
         "projectName": "BitToolbox",
-        "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
-        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
+        "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "outputPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -120,34 +126,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+    "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
+        "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
-        "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\obj\\",
+        "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "outputPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
-                "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj"
+              "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
+                "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj"
               }
             }
           }
@@ -182,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

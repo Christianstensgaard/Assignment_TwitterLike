@@ -11,50 +11,55 @@ public class ConnectionController{
   }
 
   public void Start(){
-    OpenConnection();
-    if(!Connected)
-      socketThread.Start();
+    socketThread.Start();
   }
   public void Exit(){
     socket.Close();
   }
 
   public bool Connected => socket.Connected;
-  
+
+
+  internal delegate void ClientConnectedDelegate(TcpClient client);
+  internal event ClientConnectedDelegate OnClientConnected;
+
+
   void OpenConnection(){
+
     socket.Connect(address, port);
   }
   void HandleSocketRequest(){
-    //- Handle connection request...
-
+    System.Console.WriteLine("HandleSocketRequest()");
+    OnClientConnected?.Invoke(socket);
   }
   void BackgroundWorker(){
-    while(true){
+    int reconnectCounter = 0;
+    bool Running = true;
+    while(Running){
       try
       {
         if(!socket.Connected){
-          //- Trying to reconnect.
-          for (int i = 0; i < 5; i++)
-          {
+          if(reconnectCounter++ < 5){
             OpenConnection();
             if(socket.Connected)
               break;
             else Thread.Sleep(250);
-          }
-        }
 
-        //- Data is avalilable!
+          } else Running = false;
+            
+        }
         if(socket.Available > 0)
           HandleSocketRequest();
         else Thread.Sleep(250);
       }
       catch (System.Exception)
       {
-        System.Console.WriteLine("Log this...");         
+        System.Console.WriteLine("Log this...");
+        if(reconnectCounter > 5)
+          throw new Exception("Failed to connect to server");
       }
     }
   }
-
 
 
   //PRIVATE Variables.
@@ -62,5 +67,4 @@ public class ConnectionController{
   Thread socketThread;
   string address;
   int port;
-  
 }
