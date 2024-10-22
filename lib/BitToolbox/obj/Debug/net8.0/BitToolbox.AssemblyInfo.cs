@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BitToolbox")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19eedbdfddeb48d0b36146bbd9ca0f769b3a5d85")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3656ed99516dc3246a7e2e2755a3166b46bce55")]
 [assembly: System.Reflection.AssemblyProductAttribute("BitToolbox")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BitToolbox")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

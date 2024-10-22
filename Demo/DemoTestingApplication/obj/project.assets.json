@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
+      "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
       "projectName": "DemoTestingApplication",
-      "projectPath": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
+      "projectPath": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\DemoTestingApplication.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\obj\\",
+      "outputPath": "c:\\git\\Assignment_TwitterLike\\Demo\\DemoTestingApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,8 +72,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
-              "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
+            "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+              "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
             }
           }
         }

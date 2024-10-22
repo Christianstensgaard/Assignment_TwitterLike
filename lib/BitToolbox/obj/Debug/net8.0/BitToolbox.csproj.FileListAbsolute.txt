@@ -9,3 +9,4 @@ C:\git\Assignment_TwitterLike\lib\BitToolbox\obj\Debug\net8.0\BitToolbox.dll
 C:\git\Assignment_TwitterLike\lib\BitToolbox\obj\Debug\net8.0\refint\BitToolbox.dll
 C:\git\Assignment_TwitterLike\lib\BitToolbox\obj\Debug\net8.0\BitToolbox.pdb
 C:\git\Assignment_TwitterLike\lib\BitToolbox\obj\Debug\net8.0\ref\BitToolbox.dll
+C:\git\Assignment_TwitterLike\lib\BitToolbox\obj\Debug\net8.0\BitToolbox.sourcelink.json

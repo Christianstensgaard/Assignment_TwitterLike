@@ -1,32 +1,47 @@
-﻿namespace Service;
-using Service.Models;
+﻿using System.Runtime.CompilerServices;
+using Service.Interfaces;
+
+namespace Service;
 public abstract class AService
 {
-  /// <summary>
-  /// When the Service is called this will be called from X
-  /// </summary>
-  protected abstract void OnRequest();
-  /// <summary>
-  /// Running once on Start
-  /// </summary>
-  protected abstract void OnStart(ServiceConfig ServiceSettings);
-  /// <summary>
-  /// Running once on close
-  /// </summary>
-  protected abstract void OnClose();
+
+  protected delegate void ErrorDelegate();
+  protected delegate void CloseDelegate();
+
+  protected event ErrorDelegate? OnError;
+  protected event CloseDelegate? OnClose;
+
+  public abstract void OnInit(ServiceConfig config);
+  public abstract void OnRequest();
 
 
-
-  protected void WriteRequest(){
-    // writer request to 
+  /// <summary>
+  /// Write request to Service
+  /// </summary>
+  /// <param name="streamModel"></param>
+  public void Write(IServiceStream streamModel){
+    Service.Runtime.CreateRequest(ServiceHeader, streamModel.Serialize());
   }
 
-
-  protected void CreateRequest(){
-    //- Create a request to be sendt over the message bus
+  /// <summary>
+  /// read request, using the IServiceStream ad template
+  /// </summary>
+  /// <param name="streamModel"></param>
+  public void Read(IServiceStream streamModel){
+    //TODO Missing logic for this function, and should maybe be changed.
   }
 
-  //- Storing the Service information.
-  RequestModel? requestModel;
+  public string ServiceClientName {get; set;} = "undefined";
+  internal byte[]? ServiceHeader;
+}
 
+public enum ServiceType{
+  Slave,
+  Master,
+  Hybrid
+}
+
+public class ServiceConfig{
+  public string ServiceName { get; set; } = "Undefined";
+  public ServiceType? ServiceType {get; set;}
 }

@@ -1,7 +1,19 @@
 namespace Service.Models;
 public class RequestModel{
-    public int Id { get; set; }
-    public string ServiceName { get; set; }
-    public string FunctionName { get; set; }
-    public byte[] Payload { get; set; }
+  public string FunctionClientName { get; set; }
+  public string ServiceClientName { get; set; }
+
+  public byte[] ConverToByte(){
+    using MemoryStream s = new MemoryStream();
+    using BinaryWriter w = new BinaryWriter(s);
+
+    w.Write(ServiceClientName);
+    w.Write(FunctionClientName);
+
+    return s.GetBuffer();
+  }
+
+
+
+
 }
