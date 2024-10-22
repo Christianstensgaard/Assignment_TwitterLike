@@ -1,4 +1,5 @@
 using System.Net.Sockets;
+using BitToolbox;
 using Service.Controllers;
 using Service.Tools;
 
@@ -18,6 +19,7 @@ public class Service{
 
     socket = new ConnectionController(address, port);
     socket.OnClientConnected += SocketHandler;
+    socket.OnConnected       += SubscribeServices;
   }
 
   public delegate void ErrorDelegate();
@@ -50,6 +52,7 @@ public class Service{
       }
     }else{
       System.Console.WriteLine("Sending Request over the network");
+      socket.Write(PackageManager.Pack(header, payload));
     }
   }
 
@@ -70,6 +73,16 @@ public class Service{
       service.ServiceHeader = HeaderManager.CreateHeader(ServiceName, config.ServiceName);
     }
   }
+
+
+  void SubscribeServices(TcpClient client){
+    foreach (var item in Services)
+    {
+      client.GetStream().Write(item.ServiceHeader);
+      client.GetStream().Flush();
+    }
+  }
+
   void SocketHandler(TcpClient client){
     byte[] networkBuffer = new byte[1024];
     int size = client.GetStream().Read(networkBuffer);
@@ -96,7 +109,6 @@ public class Service{
 
 
   }
-  
   void InvokeLocalRequest(){
 
   }

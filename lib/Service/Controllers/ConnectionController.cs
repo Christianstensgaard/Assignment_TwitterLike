@@ -16,6 +16,14 @@ public class ConnectionController{
   public void Exit(){
     socket.Close();
   }
+  public void Write(byte[] payload){
+    if(!socket.Connected)
+      return;
+
+    socket.GetStream().Write(payload);
+    socket.GetStream().Flush();
+  }
+
 
   public bool Connected => socket.Connected;
 
@@ -23,10 +31,15 @@ public class ConnectionController{
   internal delegate void ClientConnectedDelegate(TcpClient client);
   internal event ClientConnectedDelegate OnClientConnected;
 
+  internal delegate void ConnectedDelegate(TcpClient client);
+  internal event ConnectedDelegate OnConnected;
+
 
   void OpenConnection(){
-
     socket.Connect(address, port);
+
+    if(socket.Connected)
+      OnConnected?.Invoke(socket);
   }
   void HandleSocketRequest(){
     System.Console.WriteLine("HandleSocketRequest()");
