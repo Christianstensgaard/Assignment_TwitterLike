@@ -1,35 +1,47 @@
 ﻿using BitToolbox;
 using Service;
-
-System.Console.WriteLine("Starting Demo Program");
-
-
-Service.Service service = Service.Service.Runtime;
-service.ServiceName = "AccountService";
-service.AddService(new CreateAccount());
-service.Start();
+using Service.Core;
 
 
 
+ToolBox.RunTime.AddService(new ServiceA());
+ToolBox.RunTime.AddService(new ServiceB());
 
-Thread.Sleep(5000);
+ToolBox.RunTime.ServiceClientName = "AccountService";
+if(!ServiceController.Runtime.Start("127.0.0.1", 20200))
+    return;
 
-service.CreateRequest(HeaderManager.CreateHeader(0xee, "AccountDemo", "FunctionA"), new byte[0]);
-service.CreateRequest(HeaderManager.CreateHeader("AccountDemo", "FunctionA" ), new byte[10]);
+
+ToolBox.NewRequest("AccountService", "ServiceB", new byte[1]);
 
 
-while(true);
-
-class CreateAccount : AService
+class ServiceA : ServiceFunction
 {
-    public override void OnInit(ServiceConfig config)
+    public override void OnInit(FunctionConfig config)
     {
-        config.ServiceName = "CreateAccount";
+        config.FunctionName = "ServiceA";
+    }
+
+
+    public override void OnRequest()
+    {
+        System.Console.WriteLine("ServiceA Called!!!!!!!!!!!!!!!!!");
+        ToolBox.NewRequest("Database", "CreateUser", new byte[299]);
+    }
+}
+
+
+
+class ServiceB : ServiceFunction
+{
+    public override void OnInit(FunctionConfig config)
+    {
+        config.FunctionName = "ServiceB";
     }
 
     public override void OnRequest()
     {
-        System.Console.WriteLine("Request Invoked!");
+        ToolBox.NewLocalRequest("ServiceA", new byte[20]);
     }
 
 }

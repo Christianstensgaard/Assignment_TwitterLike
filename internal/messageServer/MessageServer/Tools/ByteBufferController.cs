@@ -86,6 +86,12 @@ public class ByteArray{
   public int Length { get; private set; }
   public byte[] Stream {get; private set;}
 
+  public byte[] ToArray(){
+    byte[] buffer = new byte[End - Start];
+    Array.Copy(pBuffer, Start, buffer, 0, End-Start);
+    return buffer;
+  }
+
   public byte this[int index]
   {
     get

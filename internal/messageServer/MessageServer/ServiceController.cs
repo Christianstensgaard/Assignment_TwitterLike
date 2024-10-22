@@ -10,63 +10,31 @@ public class ServiceController{
     new Thread(ServiceRunner).Start();
   }
   public void HandleRequest(TcpClient client){
-    System.Console.WriteLine("Service Connected: " + client.Client.RemoteEndPoint.AddressFamily);
-    if(client.Available > 0){
-      System.Console.WriteLine("Data waiting to be read");
-
-      byte[] buffer = new byte[2048];
-      int size = client.GetStream().Read(buffer);
-
-      switch(buffer[0]){
-        case 0xee:
-          if(buffer[1] == 0xff){
-            AddService(HeaderManager.ExstractHeader(buffer), client);
-          }
-        break;
-
-        case 0x01:
-          if(buffer[1] == 0xff)
-            InvokeService(buffer, size);
-        break;
-
-        default:
-          System.Console.WriteLine("Package blueprint incorrect!");
-        break;
-      }
-    }
+    System.Console.WriteLine("Service Connected: ");
+    AddService(new ServiceModel(){
+      Header = [0],
+      socket = client
+    });
   }
   class ServiceModel{
     public byte[] Header { get; set; }
     public TcpClient socket {get; set;}
   }
 
-  void AddService(byte[] header, TcpClient client){
-    System.Console.WriteLine("Adding New Serice to List");
-    AddService(new ServiceModel(){
+  void AddServiceFromStream(byte[] header, TcpClient client){
+    ServiceModels.Add(new ServiceModel(){
       Header = header,
       socket = client
     });
   }
 
-  void InvokeService(byte[] header, int size){
-    System.Console.WriteLine("Invoking Service!");
-
-    System.Console.WriteLine(size);
-    foreach (var Service in ServiceModels)
-    {
-      if(HeaderManager.EqualServiceName(header, Service.Header))
-      {
-        System.Console.WriteLine("Service Client Found");
-      }
-    }
-  }
+  
 
   void ServiceRunner(){
     while(true){
       ServiceModel? handle = GetService();
 
       if(handle != null){
-        System.Console.WriteLine("Clit Waiting to handled!");
         HandleRequest(handle);
       }else Thread.Sleep(250);
     }
@@ -89,7 +57,21 @@ public class ServiceController{
     return null;
   }
 
+  void NewSubscriber(ServiceModel model){
+    var buffer = bufferController.ReadNetworkStream(model.socket.GetStream());
+    if(buffer[0] != 0xee)
+      return;
+    model.Header = HeaderManager.ExstractHeader(buffer.ToArray());
+  }
+
   void HandleRequest(ServiceModel model){
+
+    if(model.Header.Length <= 1){
+      NewSubscriber(model);
+      return;
+    }
+
+    System.Console.WriteLine("Looking for Service Match.");
     var buffer = bufferController.ReadNetworkStream(model.socket.GetStream());
     lock(_lock){
       foreach (var item in ServiceModels)

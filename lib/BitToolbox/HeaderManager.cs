@@ -16,6 +16,7 @@ public class HeaderManager{
 
     return resultBuffer;
   }
+
   public static byte[] CreateHeader( byte headertype, string ServiceClientName, string ServiceFunctionName){
     byte[] RootName = Encoding.Unicode.GetBytes(ServiceClientName);
     byte[] functionName = Encoding.Unicode.GetBytes(ServiceFunctionName);
@@ -30,6 +31,17 @@ public class HeaderManager{
 
     return resultBuffer;
   }
+
+
+  public static string[] ConverToString(byte[] t1){
+    ushort ServiceClientName = BitConverter.ToUInt16(t1, 2);
+    ushort FunctionName = BitConverter.ToUInt16(t1, sizeof(ushort) + 2);
+    string clientName = Encoding.Unicode.GetString(t1, 2 + sizeof(ushort) * 2, ServiceClientName);
+    string functionName = Encoding.Unicode.GetString(t1, 2 + sizeof(ushort) * 2 + ServiceClientName, FunctionName);
+
+    return [clientName, functionName];
+  }
+
   public static bool EqualServiceName(byte[] t1,  byte[] t2){
     ushort targetOneSize = BitConverter.ToUInt16(t1, 2);
     ushort targetTwoSize = BitConverter.ToUInt16(t2, 2);
