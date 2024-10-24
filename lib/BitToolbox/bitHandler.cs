@@ -1,4 +1,5 @@
-namespace Tools;
+//- Christian Leo Stensgaard Jørgensen
+namespace BitToolbox;
 public static class BitHandler{
   public static void SetBit(byte[] byteArray, int bitIndex, bool value)
   {

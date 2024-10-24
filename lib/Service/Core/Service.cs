@@ -5,13 +5,17 @@ namespace Service.Core;
 public class ServiceController{
   static readonly object _lock = new();
   static object _lock_service = new();
+
+  public static bool lockArray = false;
   public static ServiceController Runtime {get; private set;} = new ServiceController();
 
   public string ServiceClientName { get; set; } = "Undefined";
 
   public void AddRequest(RequestModel model){
     lock(_lock){
-      if(requestPosition >= 9)
+      while(lockArray)
+        Thread.Sleep(2);
+      if(requestPosition >= 68)
       return;
       Requests[requestPosition++] = model;
     }
@@ -24,6 +28,10 @@ public class ServiceController{
     }
   }
 
+
+  public void Stop(){
+    socket.Close();
+  }
 
 
   public bool Start(string address, int port){
@@ -38,6 +46,7 @@ public class ServiceController{
     }
 
     MasterHeader = HeaderManager.CreateHeader(ServiceClientName, "MASTER");
+    ToolBox.RunTime.WriteAndFlush(PackageManager.Pack(HeaderManager.CreateHeader(0xee, ServiceClientName, "MASTER"), new byte[2]));
 
     System.Console.WriteLine("Connected to BusServer");
     running = true;
@@ -51,8 +60,9 @@ public class ServiceController{
   ServiceController(){
     socket = new TcpClient();
     tService = new Thread(BackgroundRunner);
-    Requests = new RequestModel[10];
+    Requests = new RequestModel[70];
     Subscribers = new List<ServiceFunction>();
+    ByteBuffer = new ByteBufferController();
     requestPosition = 0;
   }
 
@@ -60,6 +70,7 @@ public class ServiceController{
   Thread tService;
   bool running = false;
   byte[] MasterHeader;
+  ByteBufferController ByteBuffer {get; set;}
 
   RequestModel[] Requests {get; set;}
   List<ServiceFunction> Subscribers {get; set;}
@@ -75,33 +86,39 @@ public class ServiceController{
   }
 
   void BackgroundRunner(){
-    byte[] requestBuffer = new byte[1024];
     while(running){
       try
       {
         lock(_lock){
+          lockArray = true;
           for (int i = 0; i < requestPosition; i++)
           {
-            if(HeaderManager.EqualServiceName(Requests[i].Header, MasterHeader)){
-              InvokeSubscribers(PackageManager.Pack(Requests[i].Header, Requests[i].Payload));
+            if(Requests[i].Header[0] != 0xee && HeaderManager.EqualServiceName(Requests[i].Header, MasterHeader)){
+              InvokeSubscribers(Requests[i].Header, Requests[i].Payload);
               continue;
             }
-
             socket.GetStream().Write(PackageManager.Pack(Requests[i].Header, Requests[i].Payload));
-            socket.GetStream().Flush();
             System.Console.WriteLine("Request Sendt to the Server");
           }
-          requestPosition = 0;
+
+          if(requestPosition != 0){
+            socket.GetStream().Flush();
+            requestPosition = 0;
+          }
+          lockArray = false;
         }
 
+
         if(socket.Available > 0){
-          System.Console.WriteLine("Response Awaiting");
-          int size = socket.GetStream().Read(requestBuffer);
+          ByteArray[]? requests = ByteBuffer.Convert(socket.GetStream());
 
-          if(HeaderManager.EqualServiceName(requestBuffer, HeaderManager.CreateHeader(ServiceClientName, "Master"))){
-            InvokeSubscribers(requestBuffer);
+          for (int i = 0; i < requests.Length; i++)
+          {
+            byte[] aa = requests[i].ToArray();
+            string[] strings = HeaderManager.ConverToString(aa);
+            System.Console.WriteLine(strings[0]+" : "+strings[1]);
+            Thread.Sleep(25);
           }
-
         }
       }
 
@@ -127,28 +144,30 @@ public class ServiceController{
     return false;
   }
   bool SubscribeAll(){
-    lock(_lock_service)
+    lock(_lock)
     foreach (var item in Subscribers)
     {
       item.OnInit(item.Settings);
-
       item.FunctionHeader = HeaderManager.CreateHeader(item.ServiceClientName, item.SerivceFunctionName);
-      System.Console.WriteLine(item.SerivceFunctionName);
-      System.Console.WriteLine(item.ServiceClientName);
-       WriteAndFlush(HeaderManager.CreateHeader(0xee, item.ServiceClientName, item.SerivceFunctionName));
     }
     return true;
   }
 
-  void InvokeSubscribers(byte[] stream){
+  void InvokeSubscribers(byte[] header, byte[] payload){
     foreach (var item in Subscribers)
     {
-      if(HeaderManager.EqualFunctionName(stream, item.FunctionHeader)){
+      if(HeaderManager.EqualFunctionName(header, item.FunctionHeader)){
         item.OnRequest();
         break;
       }
     }
   }
-
-
+  void InvokeSubscribers(ByteArray array){
+    foreach (var item in Subscribers)
+    {
+      if(HeaderManager.EqualFunctionName(array.ToArray(), item.FunctionHeader)){
+        item.OnRequest();
+      }
+    }
+  }
 }

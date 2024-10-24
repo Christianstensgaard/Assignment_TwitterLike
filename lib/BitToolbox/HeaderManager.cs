@@ -1,5 +1,5 @@
+//- Christian Leo Stensgaard Jørgensen
 using System.Text;
-
 namespace BitToolbox;
 public class HeaderManager{
   public static byte[] CreateHeader(string ServiceClientName, string ServiceFunctionName){
@@ -34,10 +34,12 @@ public class HeaderManager{
 
 
   public static string[] ConverToString(byte[] t1){
+    if(t1.Length < sizeof(ushort)*2)
+      return ["Error", "Error"];
     ushort ServiceClientName = BitConverter.ToUInt16(t1, 2);
     ushort FunctionName = BitConverter.ToUInt16(t1, sizeof(ushort) + 2);
-    string clientName = Encoding.Unicode.GetString(t1, 2 + sizeof(ushort) * 2, ServiceClientName);
-    string functionName = Encoding.Unicode.GetString(t1, 2 + sizeof(ushort) * 2 + ServiceClientName, FunctionName);
+    string clientName = Encoding.Unicode.GetString(t1, 2 + (sizeof(ushort) * 2), ServiceClientName);
+    string functionName = Encoding.Unicode.GetString(t1, 2 + (sizeof(ushort) * 2) + ServiceClientName, FunctionName);
 
     return [clientName, functionName];
   }
@@ -107,12 +109,31 @@ public class HeaderManager{
 
 public class PackageManager{
   public static byte[] Pack(byte[] header, byte[] payload){
-    byte[] resultbuffer = new byte[header.Length + payload.Length];
-    Array.Copy(header, 0, resultbuffer, 0, header.Length);
-    Array.Copy(payload, 0, resultbuffer, header.Length, payload.Length);
+    byte[] resultbuffer = new byte[header.Length + payload.Length + sizeof(Int32)];
+    Array.Copy(BitConverter.GetBytes(header.Length + payload.Length), resultbuffer, sizeof(Int32));
+    Array.Copy(header, 0, resultbuffer, sizeof(Int32), header.Length);
+    Array.Copy(payload, 0, resultbuffer, header.Length + sizeof(Int32), payload.Length);
 
     return resultbuffer;
   }
+  public static byte[] Unpack(byte[] stream, int start ){
+    int packageSize = BitConverter.ToInt32(stream, start);
+    byte[] package = new byte[packageSize];
+    System.Console.WriteLine(packageSize);
+    Array.Copy(stream, sizeof(Int32), package, 0, packageSize);
+
+    return package;
+  }
+
+  public static byte[] Unpack(ByteArray byteArray){
+    int packageSize = BitConverter.ToInt32(byteArray.Stream, byteArray.Start);
+    byte[] package = new byte[packageSize];
+    System.Console.WriteLine(packageSize);
+    Array.Copy(byteArray.Stream, sizeof(Int32), package, 0, packageSize);
+
+    return package;
+  }
+
 
   public static byte[] GetPayload(byte[] stream){
     ushort FirstSize  = BitConverter.ToUInt16(stream, 2);

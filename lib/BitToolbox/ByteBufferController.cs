@@ -1,43 +1,44 @@
-using System.Drawing;
+//- Christian Leo Stensgaard Jørgensen
 using System.Net.Sockets;
 
-namespace MessageServer.Tools;
+namespace BitToolbox;
 public class ByteBufferController{
   const int BufferSize = 10000;
   const int bufffermargin = 500;
 
-  
 
-
+  public ByteArray[] Convert(NetworkStream stream){
+    List<ByteArray> byteArrays = new List<ByteArray>();
+    ByteArray buffer = Allocate(500);
+    int size = stream.Read(buffer.Stream, buffer.Start, 500);
+    int position = 0;
+    while(position + sizeof(Int32) <= size){
+      int psize = BitConverter.ToInt32(globalBuffer, position);
+      int start = position + sizeof(Int32);
+      position += sizeof(Int32);
+      position += psize;
+      byteArrays.Add(new ByteArray(globalBuffer, start, psize + start));
+    }
+    return byteArrays.ToArray();
+  }
 
   public int Copy(byte[] stream){
     return -1;
   }
 
-  public ByteArray ReadNetworkStream(NetworkStream stream){
-    int totalBytesRead = 0;
-    int readSize = 256;
-    int bytesRead = 0;
-
-     while (stream.DataAvailable){
-      bytesRead = stream.Read(globalBuffer, currentBufferPosition + totalBytesRead, readSize);
-
-        if (bytesRead == 0)
-          break;
-
-        totalBytesRead += bytesRead;
-
-        if (currentBufferPosition + totalBytesRead >= globalBuffer.Length)
-        {
-          throw new InvalidOperationException("Buffer too small to hold the incoming data.");
-        }
-     }
-
-    return new ByteArray(globalBuffer, ScalePosition(totalBytesRead), currentBufferPosition + totalBytesRead);
-  }
-
   public void Free(ByteArray array){
     //- Not Needed atm...
+  }
+
+  public ByteArray? Copy(byte[] stream, int start, int size){
+    int length = size;
+
+    if(length <= 0)
+      return null;
+
+    Check(length);
+    Array.Copy(stream,start,globalBuffer, currentBufferPosition, length);
+    return new ByteArray(globalBuffer, currentBufferPosition, length + ScalePosition(length));
   }
 
   public ByteArray Allocate(byte[] stream){
@@ -50,13 +51,17 @@ public class ByteBufferController{
 
   public ByteArray Allocate(int size){
     Check(size);
-    return new ByteArray(globalBuffer, ScalePosition(size), currentBufferPosition + size);
+    return new ByteArray(globalBuffer, currentBufferPosition, ScalePosition(size) + size);
   }
-
-  int ScalePosition(int size){
-    int current = currentBufferPosition;
-    currentBufferPosition += size;
-    return current;
+  private static readonly object bufferLock = new object();
+  int ScalePosition(int size)
+  {
+      lock (bufferLock)
+      {
+          int current = currentBufferPosition;
+          currentBufferPosition += size;
+          return current;
+      }
   }
 
   void ClearBuffer(){

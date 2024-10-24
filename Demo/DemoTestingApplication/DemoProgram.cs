@@ -1,19 +1,15 @@
-﻿using BitToolbox;
-using Service;
+﻿using Service;
 using Service.Core;
 
+ToolBox.RunTime.ServiceClientName = "API";
+ToolBox.AddService(new ServiceA());
+ToolBox.AddService(new ServiceB());
 
-
-ToolBox.RunTime.AddService(new ServiceA());
-ToolBox.RunTime.AddService(new ServiceB());
-
-ToolBox.RunTime.ServiceClientName = "AccountService";
 if(!ServiceController.Runtime.Start("127.0.0.1", 20200))
     return;
 
 
-ToolBox.NewRequest("AccountService", "ServiceB", new byte[1]);
-
+ToolBox.NewRequest("API", "ServiceB", [0xff,0xff]);
 
 class ServiceA : ServiceFunction
 {
@@ -22,15 +18,11 @@ class ServiceA : ServiceFunction
         config.FunctionName = "ServiceA";
     }
 
-
     public override void OnRequest()
     {
-        System.Console.WriteLine("ServiceA Called!!!!!!!!!!!!!!!!!");
-        ToolBox.NewRequest("Database", "CreateUser", new byte[299]);
+        Request("ServiceB", [0xff]);
     }
 }
-
-
 
 class ServiceB : ServiceFunction
 {
@@ -41,7 +33,6 @@ class ServiceB : ServiceFunction
 
     public override void OnRequest()
     {
-        ToolBox.NewLocalRequest("ServiceA", new byte[20]);
+        System.Console.WriteLine("Service B Called");
     }
-
 }
