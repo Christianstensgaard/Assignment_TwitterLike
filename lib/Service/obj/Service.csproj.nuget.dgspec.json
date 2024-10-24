@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {}
+    "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {}
   },
   "projects": {
-    "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
+    "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
         "projectName": "BitToolbox",
-        "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+        "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
         "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-        "outputPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
+        "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -65,14 +65,14 @@
         }
       }
     },
-    "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+    "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
+        "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-        "outputPath": "c:\\git\\Assignment_TwitterLike\\lib\\Service\\obj\\",
+        "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -90,8 +90,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
-                "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj"
+              "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj": {
+                "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj"
               }
             }
           }

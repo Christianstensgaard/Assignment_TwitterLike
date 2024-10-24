@@ -34,7 +34,7 @@ public class NetworkController{
     while(Running){
       if(Socket.Pending()){
         System.Console.WriteLine("Accepting TcpClient");
-        Service.HandleRequest(Socket.AcceptTcpClient());
+        Service.NewConnection(Socket.AcceptTcpClient());
       } else Thread.Sleep(250);
     }
   }

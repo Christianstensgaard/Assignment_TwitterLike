@@ -1,35 +1,38 @@
-﻿using BitToolbox;
-using Service;
+﻿using Service;
+using Service.Core;
 
-System.Console.WriteLine("Starting Demo Program");
+ToolBox.RunTime.ServiceClientName = "API";
+ToolBox.AddService(new ServiceA());
+ToolBox.AddService(new ServiceB());
 
-
-Service.Service service = Service.Service.Runtime;
-service.ServiceName = "AccountService";
-service.AddService(new CreateAccount());
-service.Start();
-
+if(!ServiceController.Runtime.Start("127.0.0.1", 20200))
+    return;
 
 
+ToolBox.NewRequest("API", "ServiceB", [0xff,0xff]);
 
-Thread.Sleep(5000);
-
-service.CreateRequest(HeaderManager.CreateHeader(0xee, "AccountDemo", "FunctionA"), new byte[0]);
-service.CreateRequest(HeaderManager.CreateHeader("AccountDemo", "FunctionA" ), new byte[10]);
-
-
-while(true);
-
-class CreateAccount : AService
+class ServiceA : ServiceFunction
 {
-    public override void OnInit(ServiceConfig config)
+    public override void OnInit(FunctionConfig config)
     {
-        config.ServiceName = "CreateAccount";
+        config.FunctionName = "ServiceA";
     }
 
     public override void OnRequest()
     {
-        System.Console.WriteLine("Request Invoked!");
+        Request("ServiceB", [0xff]);
+    }
+}
+
+class ServiceB : ServiceFunction
+{
+    public override void OnInit(FunctionConfig config)
+    {
+        config.FunctionName = "ServiceB";
     }
 
+    public override void OnRequest()
+    {
+        System.Console.WriteLine("Service B Called");
+    }
 }
