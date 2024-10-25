@@ -55,8 +55,8 @@
   doing the development, Tracing and Logging was one of the goals, and i wanted to build it inside the Service client, so using the messageSystem will be alot easyer, doing
   development of the services.
 
-  > [!IMPORTANT]
-  > Alot of the Logging and Tracing functions are not working, and there is only a function at the moment, to simulate where the different logging should take place.
+> [!IMPORTANT]
+> Alot of the Logging and Tracing functions are not working, and there is only a function at the moment, to simulate where the different logging should take place.
 
 ### Message-server
 - The Message Server... oh god
