@@ -27,7 +27,7 @@
 - a deep-dive into how the system is designed and used.
 
 ### Libarary
->[Tip]
+>[!Tip]
 > Alot of the lib's are not optimized and therefore there will be some functions that should be refactored.
 
 1. #### BitToolBox
@@ -55,7 +55,7 @@
   doing the development, Tracing and Logging was one of the goals, and i wanted to build it inside the Service client, so using the messageSystem will be alot easyer, doing 
   development of the services. 
 
-  >[NOTE]
+  >[!NOTE]
   > Alot of the Logging and Tracing functions are not working, and there is only a function at the moment, to simulate where the different logging should take place.
 
 ### Message-server
@@ -64,7 +64,7 @@
 ### Databases
 - The databases are connected over using a DatabaseService, connected to the Message server, and can be called by all the connected services.
 
->[INFO] At this point, there are no rules build in, to handle what types of services that can use the Database Serviecs. In the Production this should maybe be changed 
+>[!INFO] At this point, there are no rules build in, to handle what types of services that can use the Database Serviecs. In the Production this should maybe be changed 
 > to create Rules on the network.
 
 
