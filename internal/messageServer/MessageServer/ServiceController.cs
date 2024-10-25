@@ -6,7 +6,6 @@ public class ServiceController{
   public ServiceController(){
     bufferController = new ByteBufferController();
     connections = new List<SlaveConnection>();
-    requests = new ByteArray[10];
     new Thread(BackgroundWorker).Start();
   }
   public static object _lock = new();
@@ -27,13 +26,13 @@ public class ServiceController{
   void HandleStream(ByteArray? stream, SlaveConnection connection){
     if(stream == null)
       return;
-    
     System.Console.WriteLine(stream[0]);
     switch(stream[0]){
       case 0xee:
         if(stream[1] != 0xff)
           break;
         connection.Header = stream.ToArray();
+        TraceAndLogHandler(null, connection.Header, 2 );
         System.Console.WriteLine("New Subscribtion Created");
       return;
     }
@@ -41,16 +40,12 @@ public class ServiceController{
     if(connection.Header == null)
       return;
 
-
-
     string[] buf = HeaderManager.ConverToString(stream.ToArray());
     System.Console.WriteLine();
     System.Console.WriteLine(buf[0]);
     System.Console.WriteLine(buf[1]);
     System.Console.WriteLine();
     InvokeSlave(stream);
-
-
   }
   void BackgroundWorker(){
     while(true){
@@ -76,6 +71,8 @@ public class ServiceController{
               currentPosition += sizeof(Int32);
               HandleStream(bufferController.Copy(buffer, currentPosition, packageSize), item);
               currentPosition += packageSize;
+              //NOTE This function can be changed, to use the bufferController class only. 
+              //- made a function to handle the networkStream directly instead of creating a new byte[]
             }
           }
         }
@@ -88,8 +85,6 @@ public class ServiceController{
   }
   void InvokeSlave(ByteArray stream){
     SlaveConnection? pSlave = null;
-    try
-    {
       byte[] streamBuffer = stream.ToArray();
       lock(_lock){
         foreach (var s in connections)
@@ -102,30 +97,33 @@ public class ServiceController{
             {
               s.Socket.GetStream().Write(PackageManager.Pack(streamBuffer, new byte[2]));
               s.Socket.GetStream().Flush();
+
+              TraceAndLogHandler(streamBuffer, s.Header, 0);
               return;
             }
             catch (System.Exception)
             {
+              TraceAndLogHandler(streamBuffer, s.Header, 4);
               continue;
             }
           }
-        } 
+        }
         System.Console.WriteLine("No header match found");
+        TraceAndLogHandler(streamBuffer, null, 0);
       }
-    }
-    catch (System.Exception)
-    {
-      System.Console.WriteLine("Error l112:ServiceController.cs");
-    }
   }
 
+    private void TraceAndLogHandler(byte[]? streamBuffer, byte[]? header, int TraceTypeID)
+    {
+      System.Console.WriteLine("Handling Tracing and logging");
+      //- Function is still missing.
+    }
 
-  public class SlaveConnection{
+    public class SlaveConnection{
     public byte[] Header {get;set;}
     public TcpClient? Socket {get; set; }
   }
 
-  ByteArray[] requests;
-  List<SlaveConnection> connections;
-  ByteBufferController bufferController;
+    readonly List<SlaveConnection> connections;
+    readonly ByteBufferController bufferController;
 }

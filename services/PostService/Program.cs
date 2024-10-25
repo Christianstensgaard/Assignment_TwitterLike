@@ -1,6 +1,7 @@
 ﻿using Service;
 
 ToolBox.RunTime.ServiceClientName = "PostService";
+ToolBox.AddService(new ValidatePost());
 ToolBox.AddService(new CreatePost());
 ToolBox.AddService(new UpdatePost());
 ToolBox.AddService(new DeletePost());
@@ -17,11 +18,9 @@ public class ValidatePost : ServiceFunction
 
     public override void OnRequest()
     {
-      
+      System.Console.WriteLine("ValidatePost!");
     }
 }
-
-
 
 public class CreatePost : ServiceFunction
 {
@@ -36,6 +35,7 @@ public class CreatePost : ServiceFunction
     }
 }
 
+
 public class UpdatePost : ServiceFunction
 {
     public override void OnInit(FunctionConfig config)
@@ -48,6 +48,7 @@ public class UpdatePost : ServiceFunction
       System.Console.WriteLine("Updating post!");
     }
 }
+
 
 public class DeletePost : ServiceFunction
 {
