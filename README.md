@@ -30,7 +30,7 @@
 >[Tip]
 > Alot of the lib's are not optimized and therefore there will be some functions that should be refactored.
 
-1. ## BitToolBox
+1. #### BitToolBox
   1. **BitHandler** this class is used to set a single bit in a Array of bytes, in the future, this can be used to compress different payloads, 
      to make the size of the package alot smaller, but right now, this is not used. 
 
@@ -41,7 +41,7 @@
   3. **HeaderManager** this class is used by the  Server, to manage the location of the data package, (service call), and have different functions
      to easy Pack and Read the header file.
 
-2. ## Serice 
+2. #### Service
   The service libarary are the client, for the service client system, and have all the features to Create services including request and response. 
 
 ### Services
@@ -69,7 +69,6 @@
 
 
 # Conclusion
-- how did the project go, and what should i do diffferently. 
 1. I have been using alot of energy on designing the message system, to handle the different requests. this includes
    Beginning of Tracing and Logging system, async communication desing, Tcp protocol, with minimal package overhead.
    Creating the message server and client was a big task, that took alot of my time designing and testing. and maybe
