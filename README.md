@@ -27,7 +27,7 @@
 - a deep-dive into how the system is designed and used.
 
 ### Libarary
-> [!Tip]
+> [!TIP]
 > Alot of the lib's are not optimized and therefore there will be some functions that should be refactored.
 
 1. #### BitToolBox
