@@ -1,4 +1,4 @@
-> [INFO]
+> [!INFO]
 > This is a schoool project, and should not be used for real-life application.
 > the only reason this repo is public is for sharing purpose only.
 
@@ -9,9 +9,6 @@
   2. [Services](#services)
   3. [Message-Server](#message-server)
   4. [Databases](#databases)
-
-
-
 
 # Getting started using the system
 1. Install Docker
