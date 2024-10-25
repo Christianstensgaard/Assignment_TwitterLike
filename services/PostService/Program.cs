@@ -49,7 +49,6 @@ public class UpdatePost : ServiceFunction
     }
 }
 
-
 public class DeletePost : ServiceFunction
 {
     public override void OnInit(FunctionConfig config)
