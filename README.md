@@ -1,4 +1,4 @@
-> [!INFO]
+> [!NOTE]
 > This is a schoool project, and should not be used for real-life application.
 > the only reason this repo is public is for sharing purpose only.
 
