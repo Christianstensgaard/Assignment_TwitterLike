@@ -25,6 +25,22 @@ services:
     depends_on:
       - message_server
 
+  account_db:
+    image: account_db:1.0
+    build:
+      context: Databases/AccountDb
+      dockerfile: dockerfile
+    depends_on:
+      - db_service
+
+  post_db:
+    image: post_db:1.0
+    build:
+      context: Databases/PostDb
+      dockerfile: dockerfile
+    depends_on:
+      - db_service
+
   account_service:
     image: account_service:1.0
     build:

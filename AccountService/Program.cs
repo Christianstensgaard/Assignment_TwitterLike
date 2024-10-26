@@ -10,6 +10,8 @@ ToolBox.AddService(new Logout());
 ToolBox.RunTime.Start("message_server", 20200);
 
 
+
+
 public class CreateAccount : ServiceFunction
 {
     public override void OnInit(FunctionConfig config)
@@ -19,8 +21,14 @@ public class CreateAccount : ServiceFunction
 
     public override void OnRequest()
     {
-      System.Console.WriteLine("Creating Account");
+        ToolBox.NewRequest("DatabaseService", "CreateAccount", [0xff,0xee]);
     }
+
+    
+
+
+
+
 }
 
 public class DeleteAccount : ServiceFunction
@@ -60,4 +68,10 @@ public class Logout : ServiceFunction
     {
       System.Console.WriteLine("Logout");
     }
+
+
 }
+
+
+
+

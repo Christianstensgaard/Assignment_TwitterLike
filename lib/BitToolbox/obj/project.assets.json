@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
       "projectName": "BitToolbox",
-      "projectPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
+      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "c:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
+      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,11 +1,48 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "BitToolbox/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/BitToolbox.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BitToolbox.dll": {}
+        }
+      },
+      "Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "BitToolbox": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Service.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BitToolbox/1.0.0": {
+      "type": "project",
+      "path": "../lib/BitToolbox/BitToolbox.csproj",
+      "msbuildProject": "../lib/BitToolbox/BitToolbox.csproj"
+    },
+    "Service/1.0.0": {
+      "type": "project",
+      "path": "../lib/Service/Service.csproj",
+      "msbuildProject": "../lib/Service/Service.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Service >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Chalo\\.nuget\\packages\\": {}
@@ -13,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\PostService\\PostService.csproj",
+      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\PostService.csproj",
       "projectName": "PostService",
-      "projectPath": "C:\\git\\Assignment_TwitterLike\\PostService\\PostService.csproj",
+      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\PostService.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "C:\\git\\Assignment_TwitterLike\\PostService\\obj\\",
+      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,7 +71,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+              "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

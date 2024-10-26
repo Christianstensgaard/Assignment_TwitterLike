@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\AccountService\\AccountService.csproj",
-      "projectName": "AccountService",
-      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\AccountService\\AccountService.csproj",
+      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
+      "projectName": "SimulatorApp",
+      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\AccountService\\obj\\",
+      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
