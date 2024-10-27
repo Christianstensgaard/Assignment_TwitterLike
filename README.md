@@ -1,3 +1,7 @@
+> [!WARNING]
+> Made a mistake while creating something in the tracing, and therefore made a mistake so this branch and the messageServer, don't work,
+> Please use the commit before this one, if testing the system
+
 > [!NOTE]
 > This is a schoool project, and should not be used for real-life application.
 > the only reason this repo is public is for sharing purpose only.
