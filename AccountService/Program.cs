@@ -21,14 +21,10 @@ public class CreateAccount : ServiceFunction
 
     public override void OnRequest()
     {
+      //check
+
         ToolBox.NewRequest("DatabaseService", "CreateAccount", [0xff,0xee]);
     }
-
-    
-
-
-
-
 }
 
 public class DeleteAccount : ServiceFunction

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService", "AccountSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatorApp", "SimulatorApp\SimulatorApp.csproj", "{3AD74EE9-DF3E-488E-8170-317C233742A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceSystem", "lib\TraceSystem\TraceSystem.csproj", "{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{3AD74EE9-DF3E-488E-8170-317C233742A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AD74EE9-DF3E-488E-8170-317C233742A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AD74EE9-DF3E-488E-8170-317C233742A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{73E13D9C-47F8-48D5-AF76-1EE3736F7960} = {E719B469-1062-48F2-AD67-909220689431}
 		{18FB6704-1E4F-488B-99FE-9B771C55AED7} = {E719B469-1062-48F2-AD67-909220689431}
 		{C96D99A9-B419-49C9-9DA3-CD586F7CDD83} = {E719B469-1062-48F2-AD67-909220689431}
+		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD} = {E719B469-1062-48F2-AD67-909220689431}
 	EndGlobalSection
 EndGlobal

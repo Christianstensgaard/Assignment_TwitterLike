@@ -53,27 +53,18 @@ public class ServiceController{
       lock(_lock){
         foreach (var item in connections)
         {
-          if(item.Socket.Available > 0){
-            System.Console.WriteLine("Reading Data from Client");
-            int size = item.Socket.GetStream().Read(buffer);
+          if(item.Socket == null){
+            //- Handle Some Trace and Logging. 
+            TraceAndLogHandler(null, item.Header, -1);
 
-            //- Unpack the stream.
-            int currentPosition = 0;
-            while(true){
-              int delta = size - currentPosition - sizeof(Int32);
-              if(delta <= 0)
-                break;
+            pSlace = item; // Remove when done.
+            continue;
+          }
 
-              int packageSize = BitConverter.ToInt32(buffer, currentPosition);
-              //GET   |x| - - - - - - - - [packageSize]
-              //Copy {|x| - - - - - - - - [packageSize]}
-              //Continue while there is data to be read.
-              currentPosition += sizeof(Int32);
-              HandleStream(bufferController.Copy(buffer, currentPosition, packageSize), item);
-              currentPosition += packageSize;
-              //NOTE This function can be changed, to use the bufferController class only. 
-              //- made a function to handle the networkStream directly instead of creating a new byte[]
-            }
+          ByteArray[] requests = bufferController.Convert(item.Socket.GetStream());
+          foreach (var req in requests)
+          {
+            InvokeSlave(req);
           }
         }
 

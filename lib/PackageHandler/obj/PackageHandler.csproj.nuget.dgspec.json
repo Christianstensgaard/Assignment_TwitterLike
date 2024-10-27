@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj": {}
+    "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj": {
+    "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
+        "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
         "projectName": "PackageHandler",
-        "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
+        "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
         "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\PackageHandler\\obj\\",
+        "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",

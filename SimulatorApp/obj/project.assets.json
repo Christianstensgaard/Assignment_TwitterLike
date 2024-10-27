@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
+      "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
       "projectName": "SimulatorApp",
-      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
+      "projectPath": "C:\\git\\Assignment_TwitterLike\\SimulatorApp\\SimulatorApp.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\SimulatorApp\\obj\\",
+      "outputPath": "C:\\git\\Assignment_TwitterLike\\SimulatorApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,8 +72,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
-              "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
+            "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+              "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
             }
           }
         }

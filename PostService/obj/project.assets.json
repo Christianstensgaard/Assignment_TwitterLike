@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\PostService.csproj",
+      "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\PostService\\PostService.csproj",
       "projectName": "PostService",
-      "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\PostService.csproj",
+      "projectPath": "C:\\git\\Assignment_TwitterLike\\PostService\\PostService.csproj",
       "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\PostService\\obj\\",
+      "outputPath": "C:\\git\\Assignment_TwitterLike\\PostService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,8 +72,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
-              "projectPath": "C:\\Users\\Chalo\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
+            "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj": {
+              "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj"
             }
           }
         }

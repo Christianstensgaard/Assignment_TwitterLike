@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PackageHandler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0ba41f966e58c10fa571409d1bb87740558e672")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ad3dfa6873afd1e917a84fd4ec8ef854bbf4d4b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("PackageHandler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PackageHandler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

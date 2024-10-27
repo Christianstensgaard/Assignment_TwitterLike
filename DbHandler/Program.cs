@@ -67,6 +67,10 @@ public class AccountDbManager : ServiceFunction
     {
         ToolBox.Request(RequestState.Error);
     }
+
+    ToolBox.Request("databaseService" ,"CreateAccount", [0xff]);
+
+
   }
 
 
