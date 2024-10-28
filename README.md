@@ -1,3 +1,27 @@
+# Application Development notes
+> [!NOTE]
+> Generel Application development notes
+
+**Message Server down**
+  [ ]- Right now, there is some issues with the Message Server after a rebase in a merge request. therefore i will be refactoring the Server, to handle different pre tasks before calling the slave. this will include Task system, and callback functions
+  
+
+
+# System Updates / Dev notes
+> [!NOTE]
+> All newly created Updates are displayed here filtred by date.
+
+
+
+
+
+
+
+
+
+
+
+
 > [!WARNING]
 > 27-10-24
 > Made a mistake while creating something in the tracing, and therefore made a mistake so this branch and the messageServer, don't work,
