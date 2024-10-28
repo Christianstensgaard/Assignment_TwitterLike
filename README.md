@@ -1,5 +1,5 @@
 # Application Development notes
-> [!NOTE]
+> [!INFO]
 > Generel Application development notes
 
 > [!WARNING]
