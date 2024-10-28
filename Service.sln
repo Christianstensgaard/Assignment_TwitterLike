@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulatorApp", "SimulatorAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraceSystem", "lib\TraceSystem\TraceSystem.csproj", "{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsBook", "MsBook\MsBook.csproj", "{F27AAE56-B0AB-4A01-8893-75DEEE7CC71D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{B5F2EB7A-A925-4A05-9402-0955197C6831}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,14 @@ Global
 		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B10DD0-50C4-4383-845E-CF7E0C2FE8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F27AAE56-B0AB-4A01-8893-75DEEE7CC71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27AAE56-B0AB-4A01-8893-75DEEE7CC71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27AAE56-B0AB-4A01-8893-75DEEE7CC71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27AAE56-B0AB-4A01-8893-75DEEE7CC71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F2EB7A-A925-4A05-9402-0955197C6831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F2EB7A-A925-4A05-9402-0955197C6831}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F2EB7A-A925-4A05-9402-0955197C6831}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F2EB7A-A925-4A05-9402-0955197C6831}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

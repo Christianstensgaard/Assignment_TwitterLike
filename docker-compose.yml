@@ -48,6 +48,9 @@ services:
       dockerfile: AccountService/dockerfile
     depends_on:
       - message_server
+    deploy:
+      mode: replicated
+      replicas: 1
 
   simulator_service:
     image: simulator_service:1.0
