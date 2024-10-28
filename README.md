@@ -13,7 +13,7 @@
   
 
 
-# System Updates / Dev notes
+# System Updates
 > [!NOTE]
 > All newly created Updates are displayed here filtred by date.
 
@@ -24,15 +24,7 @@
 
 
 
-
-
-
-
-> [!WARNING]
-> 27-10-24
-> Made a mistake while creating something in the tracing, and therefore made a mistake so this branch and the messageServer, don't work,
-> Please use the commit before this one, if testing the system
-
+# Project Documentation
 > [!NOTE]
 > This is a schoool project, and should not be used for real-life application.
 > the only reason this repo is public is for sharing purpose only.
