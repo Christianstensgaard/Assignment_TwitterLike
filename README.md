@@ -9,7 +9,10 @@
 
 > [!NOTE] 
   **Message Server down**
-  Right now, there is some issues with the Message Server after a rebase in a merge request. therefore i will be refactoring the Server, to handle different pre tasks before calling the slave. this will include Task system, and callback functions
+  Right now, there is some issues with the Message Server after a rebase in a merge request. therefore i will be refactoring the Server, to handle different pre tasks  
+  before calling the slave. this will include Task system, and callback functions
+> ***Task System*** - used to do a set of tasks, before calling back the to caller. this can be used to create a list of sub-task before returning
+> ***Callback*** - right now, the system don't really support callback functions, and can only handle requests. given the assignment, creating a callback system can help handling complex calls to different slaves.
   
 
 
