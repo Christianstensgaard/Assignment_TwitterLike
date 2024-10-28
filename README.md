@@ -1,5 +1,5 @@
 # Application Development notes
-> [!INFO]
+> [!TIP]
 > Generel Application development notes
 
 > [!WARNING]
@@ -14,7 +14,7 @@
 
 
 # System Updates
-> [!NOTE]
+> [!TIP]
 > All newly created Updates are displayed here filtred by date.
 
 
