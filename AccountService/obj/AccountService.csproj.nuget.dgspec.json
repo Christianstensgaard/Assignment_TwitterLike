@@ -10,19 +10,16 @@
         "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\AccountService\\AccountService.csproj",
         "projectName": "AccountService",
         "projectPath": "C:\\git\\Assignment_TwitterLike\\AccountService\\AccountService.csproj",
-        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
         "outputPath": "C:\\git\\Assignment_TwitterLike\\AccountService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -65,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -75,19 +72,16 @@
         "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
         "projectName": "BitToolbox",
         "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\BitToolbox.csproj",
-        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
         "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\BitToolbox\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -126,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -136,19 +130,16 @@
         "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
         "projectName": "Service",
         "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
         "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -191,7 +182,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

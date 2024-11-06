@@ -8,7 +8,7 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Chalo\\.nuget\\packages\\": {}
+    "C:\\Users\\Chris\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,19 +16,16 @@
       "projectUniqueName": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
       "projectName": "PackageHandler",
       "projectPath": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\PackageHandler.csproj",
-      "packagesPath": "C:\\Users\\Chalo\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Chris\\.nuget\\packages\\",
       "outputPath": "C:\\git\\Assignment_TwitterLike\\lib\\PackageHandler\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Chalo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -67,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
