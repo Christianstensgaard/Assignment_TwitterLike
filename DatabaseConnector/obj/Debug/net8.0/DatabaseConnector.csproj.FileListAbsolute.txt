@@ -1,0 +1,13 @@
+C:\git\Assignment_TwitterLike\DatabaseConnector\bin\Debug\net8.0\DatabaseConnector.deps.json
+C:\git\Assignment_TwitterLike\DatabaseConnector\bin\Debug\net8.0\DatabaseConnector.dll
+C:\git\Assignment_TwitterLike\DatabaseConnector\bin\Debug\net8.0\DatabaseConnector.pdb
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.csproj.AssemblyReference.cache
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.AssemblyInfoInputs.cache
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.AssemblyInfo.cs
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.csproj.CoreCompileInputs.cache
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.sourcelink.json
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.dll
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\refint\DatabaseConnector.dll
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\DatabaseConnector.pdb
+C:\git\Assignment_TwitterLike\DatabaseConnector\obj\Debug\net8.0\ref\DatabaseConnector.dll

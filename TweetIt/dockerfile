@@ -1,0 +1,24 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+COPY TweetIt/TweetIt.csproj ./TweetIt/
+COPY DatabaseConnector/DatabaseConnector.csproj ./DatabaseConnector/
+COPY RabbitMqDefault/RabbitMqDefault.csproj ./RabbitMqDefault/
+
+
+RUN dotnet restore TweetIt/TweetIt.csproj
+
+COPY . ./
+RUN dotnet publish -c Release -o /app/out
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+
+COPY --from=build /app/out ./
+
+EXPOSE 80
+# EXPOSE 443  # Uncomment if using HTTPS
+
+ENTRYPOINT ["dotnet", "TweetIt.dll"]

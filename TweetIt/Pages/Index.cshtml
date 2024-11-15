@@ -1,0 +1,101 @@
+﻿@page
+@model IndexModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Submit Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #666666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .response {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #e7f3fe;
+            color: #3178c6;
+            border: 1px solid #b3d7ff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Submit JSON</h1>
+        <form method="post">
+            <label for="action">Action:</label>
+            <input type="text" id="action" name="RequestModel.Action" value="@Model.RequestModel?.Action" placeholder="Enter action" />
+
+            <label for="payload">Payload:</label>
+            <textarea id="payload" name="RequestModel.Payload" placeholder="Enter payload">@Model.RequestModel?.Payload</textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ServerResponse))
+        {
+            <div class="response">
+                <strong>Response:</strong>
+                <p>@Model.ServerResponse</p>
+            </div>
+        }
+    </div>
+</body>
+</html>

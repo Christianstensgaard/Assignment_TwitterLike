@@ -1,0 +1,13 @@
+C:\git\Assignment_TwitterLike\RabbitMqDefault\bin\Release\net8.0\RabbitMqDefault.deps.json
+C:\git\Assignment_TwitterLike\RabbitMqDefault\bin\Release\net8.0\RabbitMqDefault.dll
+C:\git\Assignment_TwitterLike\RabbitMqDefault\bin\Release\net8.0\RabbitMqDefault.pdb
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.csproj.AssemblyReference.cache
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.AssemblyInfoInputs.cache
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.AssemblyInfo.cs
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.csproj.CoreCompileInputs.cache
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.sourcelink.json
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.dll
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\refint\RabbitMqDefault.dll
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\RabbitMqDefault.pdb
+C:\git\Assignment_TwitterLike\RabbitMqDefault\obj\Release\net8.0\ref\RabbitMqDefault.dll
