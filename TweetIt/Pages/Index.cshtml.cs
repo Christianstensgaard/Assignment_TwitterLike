@@ -42,8 +42,6 @@ public class IndexModel : PageModel
             if (parsedJson != null)
             {
                 ServerResponse = $"JSON received successfully! Action: {parsedJson.Action}, Payload: {parsedJson.Payload}";
-
-
                 System.Console.WriteLine(parsedJson.Action);
 
                 string[] actions = parsedJson.Action.Split('.');
@@ -59,7 +57,8 @@ public class IndexModel : PageModel
                     case "post":
                         System.Console.WriteLine("Running post Service Handler!");
                         payload = parsedJson.Payload.Split(',');
-                        new PostController().Createpost(payload[0], payload[1], payload[2]);
+                        if(payload.Length >=3)
+                          new PostController().Createpost(payload[0], payload[1], payload[2]);
                     break;
 
 
@@ -68,8 +67,6 @@ public class IndexModel : PageModel
                      System.Console.WriteLine("Unknown action id");
                      break;
                 }
-
-
             }
             else
             {

@@ -79,6 +79,12 @@ services:
       - rabbitmq
     environment:
       - "RABBITMQ_HOST=rabbitmq"
+
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+
     networks:
       - "api_network"
 
@@ -92,6 +98,10 @@ services:
       - "RABBITMQ_HOST=rabbitmq"
     networks:
       - "api_network"
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
 
 volumes:
   rabbitmq_data:
