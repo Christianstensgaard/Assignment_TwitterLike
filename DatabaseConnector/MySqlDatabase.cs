@@ -5,13 +5,10 @@ public class MySqlDatabase
 {
     private string _connectionString;
 
-    // Constructor: Initialize with the database username and password
     public MySqlDatabase(string username, string password, string host = "localhost", string database = "")
     {
         _connectionString = $"Server={host};Database={database};User ID={username};Password={password};";
     }
-
-    // Function to execute a query (select, insert, update, delete, etc.)
     public DataTable ExecuteQuery(string query)
     {
         DataTable result = new DataTable();
@@ -32,8 +29,6 @@ public class MySqlDatabase
 
         return result;
     }
-
-    // Function to execute a non-query (insert, update, delete)
     public int ExecuteNonQuery(string query)
     {
         int rowsAffected = 0;
@@ -54,8 +49,6 @@ public class MySqlDatabase
 
         return rowsAffected;
     }
-
-    // Function to easily create an SQL insert statement
     public string CreateInsertQuery(string tableName, Dictionary<string, object> columns)
     {
         string columnNames = string.Join(", ", columns.Keys);
@@ -66,8 +59,6 @@ public class MySqlDatabase
 
         return $"INSERT INTO {tableName} ({columnNames}) VALUES ({values});";
     }
-
-    // Function to easily create an SQL select statement
     public string CreateSelectQuery(string tableName, List<string> columns = null, string whereClause = "")
     {
         string columnNames = columns != null && columns.Count > 0 ? string.Join(", ", columns) : "*";

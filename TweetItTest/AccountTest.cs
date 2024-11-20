@@ -5,7 +5,7 @@ namespace TweetItTest;
 
 public class AccountTest
 {
-  public static RabbitMqDefault.Converter.AccountConverter.AccountModel  Model = new(){
+  public static AccountConverter.AccountModel  Model = new(){
     Username = "UserDemo",
     Password = "PassDemo",
     Activity = 1
