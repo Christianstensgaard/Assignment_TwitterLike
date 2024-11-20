@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetIt", "TweetIt\TweetIt.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService", "AccountService\AccountService.csproj", "{6C935B99-6C8C-449F-B4FD-E63F1694E340}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TweetItTest", "TweetItTest\TweetItTest.csproj", "{7A3168AF-932A-47EF-A30A-DD95119EBFBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6C935B99-6C8C-449F-B4FD-E63F1694E340}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C935B99-6C8C-449F-B4FD-E63F1694E340}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C935B99-6C8C-449F-B4FD-E63F1694E340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A3168AF-932A-47EF-A30A-DD95119EBFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A3168AF-932A-47EF-A30A-DD95119EBFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A3168AF-932A-47EF-A30A-DD95119EBFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A3168AF-932A-47EF-A30A-DD95119EBFBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

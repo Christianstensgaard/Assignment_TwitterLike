@@ -59,9 +59,12 @@ public class MySqlDatabase
     public string CreateInsertQuery(string tableName, Dictionary<string, object> columns)
     {
         string columnNames = string.Join(", ", columns.Keys);
-        string values = string.Join(", ", columns.Values);
 
-        return $"INSERT INTO {tableName} ({columnNames}) VALUES ({values})";
+        // Format values to handle different types (e.g., strings, numbers)
+        string values = string.Join(", ", columns.Values.Select(value =>
+            value is string ? $"'{value}'" : value.ToString()));
+
+        return $"INSERT INTO {tableName} ({columnNames}) VALUES ({values});";
     }
 
     // Function to easily create an SQL select statement

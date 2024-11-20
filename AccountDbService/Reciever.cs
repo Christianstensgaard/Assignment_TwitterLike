@@ -8,7 +8,7 @@ public class Reciever{
 
 
     ConnectionFactory factory = new();
-    factory.Uri = new Uri("amqp://guest:guest@localhost:5672"); // Correct format
+    factory.Uri = new Uri("amqp://guest:guest@localhost:5672");
 
     factory.ClientProvidedName = "Account Create";
 

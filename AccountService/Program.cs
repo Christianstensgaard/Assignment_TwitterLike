@@ -40,13 +40,27 @@ namespace PostService
             string connectionString = "amqp://guest:guest@rabbitmq:5672";
             WaitForRabbitMQ(connectionString);
 
+            MySqlDatabase db_connection = new MySqlDatabase("postuser", "postpassword","post-db", "PostServiceDb");
+
+
             // Create consumers and subscribe to the events
             RMQ_Recieve post_service = new RMQ_Recieve(connectionString, "account.create");
             post_service.Consumer.Received += (sender, arg) =>
             {
-                var body = arg.Body.ToArray();
-                string output = Encoding.ASCII.GetString(body);
-                Console.WriteLine("!:" + output);
+              byte[] body = arg.Body.ToArray();
+              if(body[0] != 0xA1)
+                return;
+
+              //TODO fix the converter class before finishing this.
+              var tableName = "Accounts";
+              var columns = new Dictionary<string, object>
+              {
+                  { "Username", "testuser" },
+                  { "Password", "hashed_password" },
+                  { "Activity", 0 }
+              };
+
+              string insertQuery = db_connection.CreateInsertQuery(tableName, columns);
             };
             post_service.StartListening();
 
