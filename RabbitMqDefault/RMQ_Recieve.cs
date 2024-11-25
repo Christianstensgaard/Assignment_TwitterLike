@@ -1,61 +1,82 @@
+using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace RabbitMqDefault;
 public class RMQ_Recieve : IDisposable
 {
-  public RMQ_Recieve(string connectionString, string routingKey){
-    Factory = new();
-    Factory.Uri = new Uri(connectionString);
-    Factory.ClientProvidedName = "provideName";
-    RoutingKey = routingKey;
-    QueueName = $"{routingKey}_queue";
+    private const string exchangeName = "tweet_exchange_name"; // Scoped as a constant within the class
 
-
-    cnn = Factory.CreateConnection();
-    channel = cnn.CreateModel();
-
-    channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
-    channel.QueueDeclare(QueueName, false, false, false, null);
-    channel.QueueBind(QueueName, exchangeName, RoutingKey, null);
-    channel.BasicQos(0, 1, false);
-
-    Consumer = new EventingBasicConsumer(channel);
-
-  }
-
-
-
-  public void Dispose(){
-    string consumerTag = channel.BasicConsume(QueueName, false, Consumer);
-    channel.BasicCancel(consumerTag);
-    channel.Close();
-    cnn.Close();
-  }
-
-  public void StartListening()
+    public RMQ_Recieve(string connectionString, string routingKey)
     {
-        // Start consuming messages
-        string consumerTag = channel.BasicConsume(queue: QueueName, autoAck: false, consumer: Consumer);
+        Factory = new ConnectionFactory { Uri = new Uri(connectionString), ClientProvidedName = "provideName" };
+        RoutingKey = routingKey;
+        QueueName = $"{routingKey}_queue";
 
-        // Hook up an event handler (define this externally when creating the consumer)
-        Consumer.Received += (model, ea) =>
-        {
-            var body = ea.Body.ToArray();
-            var message = System.Text.Encoding.UTF8.GetString(body);
+        cnn = Factory.CrargteConnection();
+        channel = cnn.CrargteModel();
 
-            Console.WriteLine($"[Consumer] Received: {message}");
-            channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false); // Acknowledge the message
-        };
+        channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
+        channel.QueueDeclare(QueueName, false, false, false, null);
+        channel.QueueBind(QueueName, exchangeName, RoutingKey, null);
+        channel.BasicQos(0, 1, false);
+
+        Consumer = new EventingBasicConsumer(channel);
     }
 
+  public void StartListening(Func<byte[], byte[]> handleMessage)
+  {
+    string consumerTag = channel.BasicConsume(queue: QueueName, autoAck: false, consumer: Consumer);
+    Consumer.Received += (model, arg) =>
+    {
+      try{
+        var body = arg.Body.ToArray();
+        byte[] response = handleMessage(body);
 
-  const string exchangeName = "tweet_exchange_name";
-  public string RoutingKey {get; set;}
-  public string QueueName {get;set;}
+        if (arg.BasicProperties?.ReplyTo != null){
+          var replyProps = channel.CreateBasicProperties();
+          replyProps.CorrelationId = arg.BasicProperties.CorrelationId;
+          channel.BasicPublish(
+            exchange: "",
+            routingKey: arg.BasicProperties.ReplyTo,
+            basicProperties: replyProps,
+            body: response);
+        }
+        channel.BasicAck(deliveryTag: arg.DeliveryTag, multiple: false);
+      }
+      catch (Exception ex){
+        byte[] errorResponse = Encoding.UTF8.GetBytes($"Error: {ex.Message}");
+        if (arg.BasicProperties?.ReplyTo != null){
+          var replyProps = channel.CreateBasicProperties();
+          replyProps.CorrelationId = arg.BasicProperties.CorrelationId;
 
-  public EventingBasicConsumer Consumer {get; private set;}
-  public ConnectionFactory Factory {get; private set;}
-  public IConnection cnn {get; private set;}
-  public IModel channel {get; private set;}
+          channel.BasicPublish(
+            exchange: "",
+            routingKey: arg.BasicProperties.ReplyTo, 
+            basicProperties: replyProps,
+            body: errorResponse);
+        }
+
+        channel.BasicAck(deliveryTag: arg.DeliveryTag, multiple: false);
+      }
+    };
+  }
+
+
+
+    public void Dispose()
+    {
+        string consumerTag = channel.BasicConsume(QueueName, false, Consumer);
+        channel.BasicCancel(consumerTag);
+        channel.Close();
+        cnn.Close();
+    }
+
+    public string RoutingKey { get; set; }
+    public string QueueName { get; set; }
+
+    public EventingBasicConsumer Consumer { get; private set; }
+    public ConnectionFactory Factory { get; private set; }
+    public IConnection cnn { get; private set; }
+    public IModel channel { get; private set; }
 }

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "iIOEnDPdedUaMz4TdLxpXdr5W5afVkBWHqXuZPSX62g=",
+  "Source": "TweetIt_apiGateway",
+  "BasePath": "_content/TweetIt_apiGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TweetIt_apiGateway.props" />
+</Project>

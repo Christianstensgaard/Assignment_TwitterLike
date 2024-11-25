@@ -1,0 +1,318 @@
+# PersistentVolumeClaims for MySQL databases
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+# Account Database
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account-db
+  template:
+    metadata:
+      labels:
+        app: account-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
+              value: "AccountDb"
+            - name: MYSQL_USER
+              value: "accountuser"
+            - name: MYSQL_PASSWORD
+              value: "accountpassword"
+          volumeMounts:
+            - name: sql-data
+              mountPath: /db
+      volumes:
+        - name: sql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-db
+spec:
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: account-db
+
+# Post Database
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-db
+  template:
+    metadata:
+      labels:
+        app: post-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
+              value: "PostServiceDb"
+            - name: MYSQL_USER
+              value: "postuser"
+            - name: MYSQL_PASSWORD
+              value: "postpassword"
+          volumeMounts:
+            - name: sql-data
+              mountPath: /db
+      volumes:
+        - name: sql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-db
+spec:
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: post-db
+
+# Activity Database
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activity-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: activity-db
+  template:
+    metadata:
+      labels:
+        app: activity-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DATABASE
+              value: "ActivityDb"
+            - name: MYSQL_USER
+              value: "activityuser"
+            - name: MYSQL_PASSWORD
+              value: "activitypassword"
+          volumeMounts:
+            - name: sql-data
+              mountPath: /db
+      volumes:
+        - name: sql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activity-db
+spec:
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: activity-db
+
+# RabbitMQ
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management
+          ports:
+            - containerPort: 15672
+            - containerPort: 5672
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "guest"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "guest"
+          volumeMounts:
+            - name: rabbitmq-data
+              mountPath: /var/lib/rabbitmq
+      volumes:
+        - name: rabbitmq-data
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+  selector:
+    app: rabbitmq
+
+# TweetIt App
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweetit-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweetit-app
+  template:
+    metadata:
+      labels:
+        app: tweetit-app
+    spec:
+      containers:
+        - name: tweetit-app
+          image: tweetit-app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tweetit-app
+spec:
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 80
+  selector:
+    app: tweetit-app
+
+# Post Service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+        - name: post-service
+          image: post-service:latest
+          env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 5001
+      targetPort: 80
+  selector:
+    app: post-service
+
+# Account Service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: account-service
+  template:
+    metadata:
+      labels:
+        app: account-service
+    spec:
+      containers:
+        - name: account-service
+          image: account-service:latest
+          env:
+            - name: RABBITMQ_HOST
+              value: "rabbitmq"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 5002
+      targetPort: 80
+  selector:
+    app: account-service
