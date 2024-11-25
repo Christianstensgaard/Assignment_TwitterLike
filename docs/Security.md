@@ -47,7 +47,7 @@ given the current usage of the RabbitMq, and my experience with it, i don't know
 >[!NOTE]
 > i have not implemented it inside the system, but just created some mock code, to simulate what i think it should look like. i have not implemented it, because im running out of time after had to create the system from scratch again.
 
-![](/ServiceMonitoring/ServiceMonitoring.cs)
-![](/ServiceMonitoring/Program.cs)
+![ServiceMonitoring.cs](/ServiceMonitoring/ServiceMonitoring.cs)
+![Program.cs](/ServiceMonitoring/Program.cs)
 
 this can be build on top of  all services, and can be build into the Rabbit mq lib i've created to automate the call before calling a service.
