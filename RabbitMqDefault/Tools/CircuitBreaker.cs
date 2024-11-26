@@ -14,6 +14,7 @@ public class CircuitBreaker
 
     public bool IsOpen => state == CircuitBreakerState.Open;
 
+    // Synchronous Execute method
     public void Execute(Action action, Action onFallback = null)
     {
         if (state == CircuitBreakerState.Open)
@@ -31,6 +32,32 @@ public class CircuitBreaker
         try
         {
             action();
+            Reset();
+        }
+        catch (Exception ex)
+        {
+            HandleFailure(ex, onFallback);
+        }
+    }
+
+    // Asynchronous Execute method
+    public async Task ExecuteAsync(Func<Task> action, Action onFallback = null)
+    {
+        if (state == CircuitBreakerState.Open)
+        {
+            if (DateTime.Now - lastFailureTime > timeout)
+            {
+                state = CircuitBreakerState.HalfOpen;
+            }
+            else
+            {
+                onFallback?.Invoke();
+                return;
+            }
+        }
+        try
+        {
+            await action();
             Reset();
         }
         catch (Exception ex)

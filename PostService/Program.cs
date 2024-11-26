@@ -35,51 +35,9 @@ namespace PostService
             throw new Exception("Failed to connect to RabbitMQ after several attempts.");
         }
 
-
         static void Main(string[] args)
         {
-            string connectionString = "amqp://guest:guest@rabbitmq:5672";
-            WaitForRabbitMQ(connectionString);
 
-            // Create consumers and subscribe to the events
-            RMQ_Recieve post_service = new RMQ_Recieve(connectionString, "post.create");
-            post_service.Consumer.Received += (sender, arg) =>
-            {
-                var body = arg.Body.ToArray();
-                string output = Encoding.ASCII.GetString(body);
-                Console.WriteLine("!:" + output);
-            };
-            post_service.StartListening();
-
-            RMQ_Recieve delete_service = new RMQ_Recieve(connectionString, "post.update");
-            delete_service.Consumer.Received += (sender, arg) =>
-            {
-                var body = arg.Body.ToArray();
-                string output = Encoding.ASCII.GetString(body);
-                Console.WriteLine("!:" + output);
-            };
-            delete_service.StartListening();
-
-            RMQ_Recieve update_service = new RMQ_Recieve(connectionString, "post.delete");
-            update_service.Consumer.Received += (sender, arg) =>
-            {
-                var body = arg.Body.ToArray();
-                string output = Encoding.ASCII.GetString(body);
-                Console.WriteLine("!:" + output);
-            };
-            update_service.StartListening();
-
-            RMQ_Recieve get_services = new RMQ_Recieve(connectionString, "post.get");
-            update_service.Consumer.Received += (sender, arg) =>
-            {
-                var body = arg.Body.ToArray();
-                string output = Encoding.ASCII.GetString(body);
-                Console.WriteLine("!:" + output);
-            };
-            get_services.StartListening();
-
-            while(true)
-                Console.ReadLine();
         }
     }
 }

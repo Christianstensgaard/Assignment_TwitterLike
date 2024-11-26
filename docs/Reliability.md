@@ -24,7 +24,7 @@ i've been looking a bit for what patten and design that could help the system to
 
 ## 3. Document how you've made features
 
-![RabbitMqDefault/Tools/CircuitBreaker.cs](/RabbitMqDefault/Tools/CircuitBreaker.cs)
+[RabbitMqDefault/Tools/CircuitBreaker.cs](/RabbitMqDefault/Tools/CircuitBreaker.cs)
 
 implementing a simple circuit breaker, can create a clear way to handle different kind of errors inside the services. while creating the patten i added some common fallback mechanism 
 
@@ -34,9 +34,9 @@ implementing a simple circuit breaker, can create a clear way to handle differen
 to use this class i've modified **RabbitMQ** library so with try catch, the patten can easy be used by the different services. 
 
 *here i used the Circuit breaker, to create a request for a logout*
-![codeSnippets/Circuitbreaker.cs](./codeSnippets/Circuitbreaker.cs)
+[codeSnippets/Circuitbreaker.cs](./codeSnippets/Circuitbreaker.cs)
 
 moving to the logout service inside the Account-service we can see how this is handled
-![codeSnippets/callbackCircuitbreaker.cs](./codeSnippets/callbackCircuitbreaker.cs)
+[codeSnippets/callbackCircuitbreaker.cs](./codeSnippets/callbackCircuitbreaker.cs)
 
 by doing this we have create a fallback policy, by using the circuit-breaker design patten. 

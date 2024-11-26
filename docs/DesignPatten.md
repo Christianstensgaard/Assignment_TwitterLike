@@ -14,6 +14,12 @@ This week is a self-study on microservices design patterns. You should have be n
 *Here alle the response and speculation are listed. code snippets and images are displaying in content to explanation*
 
 ### 1. Research
+
+**Sidecar Design Patten**
+yolohoe
+
+
+
 **SAGA desing patten**
 ![](./img/saga_designpatten.png)
 This design-patten might be a good chose for the system in general, but at the state of the application, this is not what i would implement in the first round.

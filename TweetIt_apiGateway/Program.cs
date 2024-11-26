@@ -1,14 +1,16 @@
-using System.Text.Json.Serialization;
+using System.Text;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using RabbitMqDefault;
-using RabbitMqDefault.Converter;
-using RabbitMqDefault.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Configuration.AddJsonFile("ocelot.json",false,false);
+
+builder.Services.AddOcelot(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -18,46 +20,53 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseOcelot().Wait();
 app.UseHttpsRedirection();
 
-app.MapPost("/create", (AccountModel model) =>
+
+
+
+app.MapPost("/account/create", async (string accountname, string passHash) => {
+    string returnMessage = "";
+    CircuitBreaker circuitBreaker = new CircuitBreaker(5, TimeSpan.FromSeconds(3));
+    await circuitBreaker.ExecuteAsync(async () =>
+    {
+      //- Checking the account name, and return the validation state of the service call
+      using RMQ_Send accValidate = RMQ_Send.Send(RouteNames.Account_validate_new);
+      accValidate.Body = Encoding.UTF8.GetBytes(accountname);
+      string validation = await accValidate.SendAndAwaitResponseAsync(TimeSpan.FromSeconds(2));
+
+      //- creating the account
+      using RMQ_Send accCreate = RMQ_Send.Send(RouteNames.Account_create);
+      accCreate.Body = Encoding.UTF8.GetBytes(accountname + passHash);
+      string state = await accCreate.SendAndAwaitResponseAsync(TimeSpan.FromSeconds(2));
+      returnMessage = "Account created!";
+    },
+    onFallback: () =>
+    {
+      returnMessage = "failed to create account!";
+
+    });
+    return Results.Ok(returnMessage);
+});
+
+
+
+
+
+
+app.MapGet("/ping", (string e) =>
 {
-
-
-    return Results.Ok($"Creating a new account for {model.Username}");
+    return "ping";
 })
 .WithName("Create new Account").WithOpenApi();
 
 
-
-app.MapPost("/logout", (string sessionKey) =>
+app.MapGet("/pong", (string e) =>
 {
-  byte[] bodySteam = JsonStream<DefaultCallModel>.ToStream(new DefaultCallModel{
-    sessionID = sessionKey
-  });
-
-  new CircuitBreaker(5, TimeSpan.FromSeconds(10)).Execute(
-    action: ()=>{
-      using var s = RMQ_Send.Send(RouteNames.Account_logout);
-      s.Body = bodySteam;
-
-      using var n = RMQ_Send.Send(RouteNames.Notify_user_logout);
-      n.Body = bodySteam;
-    },
-    onFallback: ()=>{
-      System.Console.WriteLine("Failed to Do the action");
-    }
-  );
-
+    return "pong";
 })
-.WithName("Logout").WithOpenApi();
-
-app.MapPost("/friends", (string sessionKey) =>
-{
-    return Results.Ok("Loading All friends");
-})
-.WithName("Friends").WithOpenApi();
+.WithName("Create new Account").WithOpenApi();
 
 app.Run();
 

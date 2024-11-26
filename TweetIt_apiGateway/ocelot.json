@@ -1,0 +1,28 @@
+{
+  "Routes": [
+    {
+      "UpstreamPathTemplate": "/ping",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamPathTemplate": "/pingservice",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pingservice",
+          "Port": 80
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/pong",
+      "UpstreamHttpMethod": ["Get"],
+      "DownstreamPathTemplate": "/pongservice",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "pongservice",
+          "Port": 80
+        }
+      ]
+    }
+  ]
+}

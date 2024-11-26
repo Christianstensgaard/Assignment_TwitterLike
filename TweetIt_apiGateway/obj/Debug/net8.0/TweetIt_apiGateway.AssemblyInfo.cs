@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TweetIt_apiGateway")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e4d07fa5677b5e02bf8f304123ec37aa343c186c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8a0147b5924ae02edcf47794899c27ecb37cfcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("TweetIt_apiGateway")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TweetIt_apiGateway")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
