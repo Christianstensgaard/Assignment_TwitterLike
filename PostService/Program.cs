@@ -1,9 +1,5 @@
-﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using RabbitMqDefault;
-using System;
-using System.Text;
-using System.Threading;
+﻿using PostService.Service;
+using RabbitMQ.Client;
 
 namespace PostService
 {
@@ -37,7 +33,16 @@ namespace PostService
 
         static void Main(string[] args)
         {
+          string connectionString = "amqp://guest:guest@rabbitmq:5672";
+          WaitForRabbitMQ(connectionString);
 
+          //- Services
+          new CreatePost().Start(connectionString, "post.create");
+
+
+
+          while(true)
+            Console.ReadLine();
         }
     }
 }

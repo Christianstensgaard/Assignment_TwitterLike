@@ -1,12 +1,8 @@
-﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+﻿using AccountService;
+using RabbitMQ.Client;
 using RabbitMqDefault;
-using System;
-using System.Text;
-using System.Threading;
 
-namespace PostService
-{
+namespace PostService;
 class Program
 {
   public static void WaitForRabbitMQ(string connectionString)
@@ -37,29 +33,13 @@ class Program
 
   static void Main(string[] args)
   {
-      string connectionString = "amqp://guest:guest@rabbitmq:5672";
-      WaitForRabbitMQ(connectionString); //- waiting for the service to be connected 
-      MySqlDatabase db_connection = new MySqlDatabase("postuser", "postpassword","post-db", "PostServiceDb"); //- Connecting to the database.
+    string connectionString = "amqp://guest:guest@rabbitmq:5672";
+    WaitForRabbitMQ(connectionString); //- waiting for the service to be connected 
 
+    //- Services
+    new CreateAccount().Start(connectionString, RouteNames.Account_create);
 
-      //- Creating a service for the account
-      var consumer = new RMQ_Recieve(connectionString, RouteNames.Account_validate_new);
-      consumer.StartListening((message) =>
-      {
-        
-        string userName = Encoding.UTF8.GetString(message, 0, 100);
-
-
-
-
-         
-
-          return [0xff];
-      });
-
-
-      while(true)
-        Console.ReadLine();
-    }
+    while(true)
+      Console.ReadLine();
   }
 }

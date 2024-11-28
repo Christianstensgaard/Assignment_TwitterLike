@@ -13,8 +13,8 @@ public class RMQ_Recieve : IDisposable
         RoutingKey = routingKey;
         QueueName = $"{routingKey}_queue";
 
-        cnn = Factory.CrargteConnection();
-        channel = cnn.CrargteModel();
+        cnn = Factory.CreateConnection();
+        channel = cnn.CreateModel();
 
         channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
         channel.QueueDeclare(QueueName, false, false, false, null);

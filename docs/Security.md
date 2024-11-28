@@ -31,7 +31,7 @@ First i will create a system that can lock services by using a key, this key is 
 The service monitoring should be seen as a engine, to create and monitor the keys in the network. it is also the systems responsibility to handle acceptance of the request, and handle outside requests.
 ![](./img/security2.png)
 
-using a closly monitored key system, access to the other services using a wrong key, will indicate some one is trying to access areas that should be closed. with that some breach protocol could be used to stop the remove the thread from the infrastructure.
+using a closely monitored key system, access to the other services using a wrong key, will indicate some one is trying to access areas that should be closed. with that some breach protocol could be used to stop the remove the thread from the infrastructure.
 
 
 # 3. Document
