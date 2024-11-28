@@ -6,14 +6,16 @@ Develop and execute a testing strategy.
 1. Unit Testing: Create unit tests for each service's core functionalities.
 2. Component Testing: Test microservices in isolation to ensure they function as expected.
 3. (Optional) Contract Testing: Perform integration tests to ensure seamless service interaction.
-Expectations
 
 # 1. Unit Testing
 been had a lot of problems with moq and to get it to work, so if running this, some might throw a error.
 but tried to create some, and they are displayed under.
-![Account Test](/TweetItTest/AccountTest.cs)
-![Rabbit MQ](/TweetItTest/RabbitMQ_test.cs)
-![Account RMQ Test](/TweetItTest/Account_direct_test.cs)
+
+[Account Test](/TweetItTest/AccountTest.cs)
+
+[Rabbit MQ](/TweetItTest/RabbitMQ_test.cs)
+
+[Account RMQ Test](/TweetItTest/Account_direct_test.cs)
 
 # 2. Component Testing
 ```
@@ -33,10 +35,16 @@ services:
       - "3306:3306"
 ```
 
-had problems with MOQ and therefore, i've been thinking doing unit tests inside a docker environment. i have not had the time to finish this completely due to all the problems i encountered.  
+After experiencing difficulties with MOQ, I decided to explore the use of Docker containers for unit testing. However, my progress on this endeavor has been hindered by various technical challenges and other commitments, preventing me from fully completing the project at this time."
 
 
 # 3. Contract Testing
-did not have the time to create this, but done some research on how it could be implemented, so here are some ideas how this could be done.
+***key-values***
 
-TODO missing more here
+1. Increased confidence: By verifying that the system meets the specified contracts, you can increase your confidence in its behavior.
+
+
+2. Improved maintainability: Contract testing helps ensure that changes to the system do not break existing functionality or introduce new bugs.
+
+
+3. Reduced complexity: By focusing on external interactions, contract testing helps simplify the testing process by reducing the number of test cases needed.
