@@ -9,32 +9,133 @@ This week is a self-study on microservices design patterns. You should have be n
 3. [goto](#3-implement) **Implement the design pattern in your Twitter system.**
 
 
+## 1. Research / Identify
+This section of the document contains the mindset I had during my research.
 
+* The **sidecar** design pattern offers the opportunity to split elements into different components, which can be run on the same process but can also run independently. This provides isolation of services.
+* The **Saga** design pattern was designed to help manage long-running business processes by breaking them down into smaller, independent tasks, often referred to as "legs." Each task is executed in sequence, and if one fails, they are rolled back to the previous state.
+* **Event-sourcing** is an architectural style that stores the history of an application's state as a sequence of events. By storing each state transition as a separate event, along with relevant metadata such as timestamps and version numbers.
 
-## 1. Research
+### Conclusion
+Given the simplicity of the system we're working on at the moment, I find the sidecar design pattern most useful when combined with Event-sourcing. The Saga pattern doesn't seem like the right choice for our system, as it would add unnecessary complexity to the sequential calls that are already small. On the other hand, using the Saga pattern for this kind of system might be too much given its current functions; therefore, I believe the sidecar pattern is a better fit for now.
 
-#### Side-car design patten
+I utilize TCP-Socket with Rabbit MQ to handle communication between services. Consequently, the sidecar could be linked together to handle encryption of data, as well as receiving keys and handling that part of the system.
 
-
-
-more general information can be found here 
-[Side-car](#side-car)
-
-
-
-### 2. Identify
-looking for a design patten that match the use-case for my twitter system. there are some key-features i look for.
 
 
 ### 3. Implement
+The usage of the encryption class will be run on the same process, since they are linked closely together, the class handle the encryption and decryption of the
+network stream. 
+
+![img](./img/sidecar_im.png)
+
+**Source code**
+````csharp
+
+  // Part of the RMQ_Receive class
+  public void StartListening(Func<byte[], byte[]> handleMessage)
+  {
+    string consumerTag = channel.BasicConsume(queue: QueueName, autoAck: false, consumer: Consumer);
+    Consumer.Received += (model, arg) =>
+    {
+      try{
+
+        Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>(); // <- Created the sidecar class.
+
+        var body = arg.Body.ToArray();
+        byte[] response = sidecar.Get().Decrypt(handleMessage(body)); // <- Using the Sidecar  class to decrypt the message.
+
+        if (arg.BasicProperties?.ReplyTo != null){
+          var replyProps = channel.CreateBasicProperties();
+          replyProps.CorrelationId = arg.BasicProperties.CorrelationId;
+          channel.BasicPublish(
+            exchange: "",
+            routingKey: arg.BasicProperties.ReplyTo,
+            basicProperties: replyProps,
+            body: response);
+        }
+        channel.BasicAck(deliveryTag: arg.DeliveryTag, multiple: false);
+      }
+      catch (Exception ex){
+        byte[] errorResponse = Encoding.UTF8.GetBytes($"Error: {ex.Message}");
+        if (arg.BasicProperties?.ReplyTo != null){
+          var replyProps = channel.CreateBasicProperties();
+          replyProps.CorrelationId = arg.BasicProperties.CorrelationId;
+
+          channel.BasicPublish(
+            exchange: "",
+            routingKey: arg.BasicProperties.ReplyTo,
+            basicProperties: replyProps,
+            body: errorResponse);
+        }
+
+        channel.BasicAck(deliveryTag: arg.DeliveryTag, multiple: false);
+      }
+    };
+  }
 
 
 
+  // Part of the RMQ_ReRMQ_Send class
+  public async Task<string> SendAndAwaitResponseAsync(TimeSpan timeout)
+  {
+    Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>(); // <- Creating the Sidecar...
+
+    byte[] outputStream = sidecar.Get().Encrypt(Body); // <- using the sidecar class to encrypt the message
+    var replyQueueName = channel.QueueDeclare().QueueName;
+    var consumer = new EventingBasicConsumer(channel);
+    var tcs = new TaskCompletionSource<string>();
+    var correlationId = Guid.NewGuid().ToString();
+
+    consumer.Received += (sender, args) =>
+    {
+        var response = Encoding.UTF8.GetString(args.Body.ToArray());
+        if (args.BasicProperties.CorrelationId == correlationId)
+        {
+            tcs.TrySetResult(response);
+        }
+    };
+
+    channel.BasicConsume(replyQueueName, true, consumer);
+
+    var props = channel.CreateBasicProperties();
+    props.CorrelationId = correlationId;
+    props.ReplyTo = replyQueueName;
+
+    channel.BasicPublish(exchangeName, RoutingKey, props, outputStream);
+
+    using var cts = new CancellationTokenSource(timeout);
+    cts.Token.Register(() => tcs.TrySetCanceled(), useSynchronizationContext: false);
+
+    try
+    {
+        return await tcs.Task;
+    }
+    catch (TaskCanceledException)
+    {
+        throw new TimeoutException("The request timed out waiting for a response.");
+    }
+  }
+  ````
+
+
+The sidecar class can be found here: 
+[source](/RabbitMqDefault/Tools/Sidecar.cs)
+
+The interface can be found here:
+[source](/RabbitMqDefault/interfaces/ISidecar.cs)
+
+The Encryption class can be found here:
+[source](/RabbitMqDefault/Tools/Encryption_sidecar.cs)
+
+
+## **Final Note**
+I think i've done this correctly... or maybe it should be made more abstract, by moving the decrypt function call within the Sidecar class. This way, when creating an instance of Sidecar, I can pass the message pointer as an argument, and the class will handle the decryption process internally.
 
 
 
 # Design-pattens documentation
-
+*Short context information from the source address*
 ## Side-car
 **Context** and problem
 Applications and services often require related functionality, such as monitoring, logging, configuration, and networking services. These peripheral tasks can be implemented as separate components or services.
@@ -62,3 +163,5 @@ In addition, messages must be sent to the message broker in the order they were 
 You have applied the Database per Service pattern. Each service has its own database. Some business transactions, however, span multiple service so you need a mechanism to implement transactions that span services. For example, let’s imagine that you are building an e-commerce store where customers have a credit limit. The application must ensure that a new order will not exceed the customer’s credit limit. Since Orders and Customers are in different databases owned by different services the application cannot simply use a local ACID transaction.
 
 [microservices.io](https://microservices.io/patterns/data/saga.html)
+
+[Return:Home](/README.md)

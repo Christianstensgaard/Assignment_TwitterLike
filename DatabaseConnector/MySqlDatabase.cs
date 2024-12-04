@@ -4,51 +4,71 @@ using System.Data;
 public class MySqlDatabase
 {
     private string _connectionString;
+    private MySqlConnection _connection;
 
-    public MySqlDatabase(string username, string password, string host = "localhost", string database = "")
+    public MySqlDatabase(string _connectionString)
     {
-        _connectionString = $"Server={host};Database={database};User ID={username};Password={password};";
+      this._connectionString = _connectionString;
+      OpenConnection();
+
     }
+
+     public bool IsConnected => _connection != null && _connection.State == ConnectionState.Open;
+
+    public void OpenConnection()
+    {
+      System.Console.WriteLine("Trying To connect");
+      for (int i = 0; i < 10; i++)
+      {
+        try
+        {
+          _connection = new MySqlConnection(_connectionString);
+          _connection.Open();
+          System.Console.WriteLine("Connected!");
+          break;
+        }
+        catch (Exception ex)
+        {
+          System.Console.WriteLine(ex.Message);
+          Console.Write(".");
+        }
+      }
+    }
+
     public DataTable ExecuteQuery(string query)
     {
-        DataTable result = new DataTable();
-
-        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, _connection))
         {
             try
             {
-                connection.Open();
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
+                DataTable result = new DataTable();
                 dataAdapter.Fill(result);
+                return result;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error executing query: " + ex.Message);
+                return null;
             }
         }
-
-        return result;
     }
+
     public int ExecuteNonQuery(string query)
     {
-        int rowsAffected = 0;
-
-        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        using (MySqlCommand command = new MySqlCommand(query, _connection))
         {
             try
             {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(query, connection);
-                rowsAffected = command.ExecuteNonQuery();
+                return command.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error executing query: " + ex.Message);
+                return 0;
             }
         }
-
-        return rowsAffected;
     }
+
     public string CreateInsertQuery(string tableName, Dictionary<string, object> columns)
     {
         string columnNames = string.Join(", ", columns.Keys);
@@ -59,6 +79,7 @@ public class MySqlDatabase
 
         return $"INSERT INTO {tableName} ({columnNames}) VALUES ({values});";
     }
+
     public string CreateSelectQuery(string tableName, List<string> columns = null, string whereClause = "")
     {
         string columnNames = columns != null && columns.Count > 0 ? string.Join(", ", columns) : "*";

@@ -38,11 +38,12 @@ public class RMQ_Send : IDisposable
 
     public async Task<string> SendAndAwaitResponseAsync(TimeSpan timeout)
     {
+      Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>();
+      
+      byte[] outputStream = sidecar.Get().Encrypt(Body);
       var replyQueueName = channel.QueueDeclare().QueueName;
       var consumer = new EventingBasicConsumer(channel);
-
       var tcs = new TaskCompletionSource<string>();
-
       var correlationId = Guid.NewGuid().ToString();
 
       consumer.Received += (sender, args) =>
@@ -60,7 +61,7 @@ public class RMQ_Send : IDisposable
       props.CorrelationId = correlationId;
       props.ReplyTo = replyQueueName;
 
-      channel.BasicPublish(exchangeName, RoutingKey, props, Body);
+      channel.BasicPublish(exchangeName, RoutingKey, props, outputStream);
 
       using var cts = new CancellationTokenSource(timeout);
       cts.Token.Register(() => tcs.TrySetCanceled(), useSynchronizationContext: false);

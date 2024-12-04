@@ -1,0 +1,22 @@
+FROM mysql:latest
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=your_password
+ENV MYSQL_DATABASE=AccountDb
+ENV MYSQL_USER=accountuser
+ENV MYSQL_PASSWORD=accountpassword
+
+# Set default port to 3306 (MySQL default)
+ENV MYSQL_PORT=3306
+
+# Mount a file system for the database volume
+COPY account_db.sql /app/sql/account_db.sql
+
+# Expose the MySQL port and port mapping
+EXPOSE 3306
+
+# Run the command to create the database
+RUN mysql -u root -p${MYSQL_ROOT_PASSWORD} < account_db.sql && chown -R $USER:$USER /app/sql/
+
+# Set environment variables for RabbitMQ connection
+ENV RABBITMQ_HOST=rabbitmq

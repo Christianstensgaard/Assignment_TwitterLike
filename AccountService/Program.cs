@@ -1,4 +1,4 @@
-﻿using AccountService;
+﻿using AccountService.Services;
 using RabbitMQ.Client;
 using RabbitMqDefault;
 
@@ -14,11 +14,9 @@ class Program
         {
             try
             {
-                using (var connection = factory.CreateConnection())
-                {
-                    Console.WriteLine("RabbitMQ is up and running!");
-                    return;
-                }
+              using var connection = factory.CreateConnection();
+              Console.WriteLine("RabbitMQ is up and running!");
+              return;
             }
             catch (Exception ex)
             {
@@ -38,6 +36,8 @@ class Program
 
     //- Services
     new CreateAccount().Start(connectionString, RouteNames.Account_create);
+    new AccountLogin().Start(connectionString, RouteNames.Account_login);
+    new AccountValidation().Start(connectionString, RouteNames.Account_validate_new);
 
     while(true)
       Console.ReadLine();

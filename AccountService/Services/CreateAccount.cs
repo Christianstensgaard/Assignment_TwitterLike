@@ -1,14 +1,19 @@
+using System.Text;
 using RabbitMqDefault.interfaces;
 
-namespace AccountService;
+namespace AccountService.Services;
 public class CreateAccount: AService{
-  public CreateAccount(){
-    // database = new MySqlDatabase("accountuser", "accountpassword","api_network", "AccountDb");
-  }
+  public CreateAccount()
+    {
+      //- This should be removed to Environment variable
+      string _connectionString = $"Server=account_db;Database=AccountDb;User ID=accountuser;Password=accountpassword;";
+      database = new MySqlDatabase(_connectionString);
+    }
 
   public override bool OnInit()
   {
     //- Could be used to create instance of different elements
+    System.Console.WriteLine("Init invoked!");
     return true;
   }
 
@@ -18,33 +23,38 @@ public class CreateAccount: AService{
     //- stream is the message from the broker -> caller.
     System.Console.WriteLine("Creating Account Invoked!");
 
-    string username = "DemoAccount";
-    string password = "DemoPassword";
+
+    string[] strings = Encoding.UTF8.GetString(stream).Split(",");
+
+    if(strings.Length < 2)
+      return ServiceState.Error;
 
     Dictionary<string, object> columns = new Dictionary<string, object>
     {
-        { "Username", username },
-        { "Password", password },
+        { "Username", strings[0] },
+        { "Password", strings[1] },
         { "Activity", 0 }
     };
 
     string insertQuery = database.CreateInsertQuery("Accounts", columns);
-
     int rowsAffected = database.ExecuteNonQuery(insertQuery);
 
     if (rowsAffected > 0)
     {
-        return ServiceState.Ok;
+      System.Console.WriteLine("Saved to database!");
+      return ServiceState.Ok;
     }
     else
     {
-        return ServiceState.Error;
+      System.Console.WriteLine("Error saving to database");
+      return ServiceState.Error;
     }
   }
 
   public override void onFallback()
   {
     //- Could be used for some cleaning. 
+    System.Console.WriteLine("Fallback called!");
   }
 
   public MySqlDatabase database { get; set; }

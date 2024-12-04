@@ -8,9 +8,13 @@ namespace TweetIt.Controllers;
 
 public class AccountController{
   public static string ConnectionString = "amqp://guest:guest@rabbitmq:5672";
-  public void CreateAccount(string username, string hashpass){
-    using (RMQ_Send send = new RMQ_Send(ConnectionString, "account.create")){
+  public async void CreateAccount(string username, string hashpass){
+    using (RMQ_Send send = new RMQ_Send(ConnectionString, RouteNames.Account_create)){
       send.Body = Encoding.UTF8.GetBytes($"{username},{hashpass}");
+
+      string a  = await send.SendAndAwaitResponseAsync(TimeSpan.FromSeconds(2));
+
+      System.Console.WriteLine(a);
     };
   }
 }

@@ -1,0 +1,5 @@
+- [X] - finish database connection handling, this include read and write to the database.
+- [X] - Kubernetes need to created, and tested. 
+- [ ] - Finish the API-gateway
+- [ ] - Implement a Design-patten inside the Services.
+- [ ] - finish writing documentation

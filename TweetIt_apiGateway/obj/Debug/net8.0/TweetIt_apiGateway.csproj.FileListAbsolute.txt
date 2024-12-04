@@ -32,3 +32,17 @@ C:\git\Assignment_TwitterLike\TweetIt_apiGateway\obj\Debug\net8.0\refint\TweetIt
 C:\git\Assignment_TwitterLike\TweetIt_apiGateway\obj\Debug\net8.0\TweetIt_apiGateway.pdb
 C:\git\Assignment_TwitterLike\TweetIt_apiGateway\obj\Debug\net8.0\TweetIt_apiGateway.genruntimeconfig.cache
 C:\git\Assignment_TwitterLike\TweetIt_apiGateway\obj\Debug\net8.0\ref\TweetIt_apiGateway.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\ocelot.json
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\FluentValidation.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\IPAddressRange.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\Ocelot.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\RabbitMqDefault.dll
+C:\git\Assignment_TwitterLike\TweetIt_apiGateway\bin\Debug\net8.0\RabbitMqDefault.pdb

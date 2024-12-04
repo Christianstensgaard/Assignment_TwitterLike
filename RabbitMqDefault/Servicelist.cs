@@ -5,6 +5,7 @@ public static class RouteNames{
   public const string Account_get = "account.get";
   public const string Account_update = "account.update";
   public const string Account_logout = "account.logout";
+  public const string Account_login = "account.login";
   public const string Account_validate_new = "account.validate_new";
   public const string Account_validate_login = "account.validate_login";
 

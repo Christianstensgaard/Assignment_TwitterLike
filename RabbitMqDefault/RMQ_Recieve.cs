@@ -30,8 +30,11 @@ public class RMQ_Recieve : IDisposable
     Consumer.Received += (model, arg) =>
     {
       try{
+
+        Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>();
+
         var body = arg.Body.ToArray();
-        byte[] response = handleMessage(body);
+        byte[] response = sidecar.Get().Decrypt(handleMessage(body));
 
         if (arg.BasicProperties?.ReplyTo != null){
           var replyProps = channel.CreateBasicProperties();

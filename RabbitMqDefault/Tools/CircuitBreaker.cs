@@ -43,27 +43,27 @@ public class CircuitBreaker
     // Asynchronous Execute method
     public async Task ExecuteAsync(Func<Task> action, Action onFallback = null)
     {
-        if (state == CircuitBreakerState.Open)
-        {
-            if (DateTime.Now - lastFailureTime > timeout)
-            {
-                state = CircuitBreakerState.HalfOpen;
-            }
-            else
-            {
-                onFallback?.Invoke();
-                return;
-            }
-        }
-        try
-        {
-            await action();
-            Reset();
-        }
-        catch (Exception ex)
-        {
-            HandleFailure(ex, onFallback);
-        }
+      if (state == CircuitBreakerState.Open)
+      {
+          if (DateTime.Now - lastFailureTime > timeout)
+          {
+              state = CircuitBreakerState.HalfOpen;
+          }
+          else
+          {
+              onFallback?.Invoke();
+              return;
+          }
+      }
+      try
+      {
+          await action();
+          Reset();
+      }
+      catch (Exception ex)
+      {
+          HandleFailure(ex, onFallback);
+      }
     }
 
     private void Reset()

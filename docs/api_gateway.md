@@ -1,6 +1,6 @@
 # Week 44 - API Gateways
 
-# Tasks
+## Tasks
 1. [GoTo](#1-analyze) **Analyze the current system and how a client would interact with it.**
 2. [GoTo](#2-update) **Update your system architecture diagram to include the API Gateway.**
 3. [GoTo](#3-implement) **Implement the API Gateway using e.g. Ocelot.**
@@ -163,9 +163,64 @@ this way we remove a lot of overhead, and only use the Json file as a raw text o
 
 
 
+## Ocelot
+even tho i've done something else, i tried to make use of ocelot inside the system to demonstrate the use of the web-technology's we're using doing the class. 
+
+```json
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/account/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/account/create",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/account/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/account/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/account/logout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/account/logout",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:80"
+  }
+}
+```
+
+i've tried to implement it inside the TweetIt web server to use the Api-gateway, but keep getting some errors, but for demonstration purpose i kept it in the project.
+
+
+
 # End
 **you might think why all this work for this?**
 
 In recent years, software development has seen a significant increase in resource consumption, largely due to the growing emphasis on ease of use over efficiency. As user demands for more feature-rich, intuitive, and accessible applications have surged, developers often prioritize user-friendly designs and faster delivery over optimizing resource usage. This shift has led to applications that, while easier for users to interact with, tend to consume more memory, processing power, and bandwidth. The rise of cloud computing and scalable infrastructure has further enabled this trend, as developers are less concerned with the resource constraints of individual devices, knowing that backend systems can handle the load.
 
 However, as this trend has grown, green software architecture has emerged as a response, emphasizing the need to reduce energy consumption and carbon footprints in software design. Despite this shift towards sustainability, many simple-to-use, but inefficient text-based protocols still persist. These protocols, while user-friendly, often require significant computational resources to process and transmit data. As a result, they can lead to increased energy usage, contributing to higher CO2 emissions. The environmental impact of these inefficient protocols has become a growing concern, as they highlight the trade-off between ease of use and sustainability. Thus, while software has become more accessible and intuitive, it is also consuming more energy, raising questions about its long-term environmental effects.
+
+[Return:Home](/README.md)

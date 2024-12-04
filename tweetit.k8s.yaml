@@ -1,0 +1,201 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account-db
+  template:
+    metadata:
+      labels:
+        app: account-db
+    spec:
+      containers:
+      - name: account-db
+        image: mysql:latest
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpassword"
+        - name: MYSQL_DATABASE
+          value: "AccountDb"
+        - name: MYSQL_USER
+          value: "accountuser"
+        - name: MYSQL_PASSWORD
+          value: "accountpassword"
+      volumes:
+        - name: account-db-storage
+          persistentVolumeClaim:
+            claimName: account-db-storage
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-db
+  template:
+    metadata:
+      labels:
+        app: post-db
+    spec:
+      containers:
+      - name: post-db
+        image: mysql:latest
+        ports:
+        - containerPort: 3307
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "rootpassword"
+        - name: MYSQL_DATABASE
+          value: "PostServiceDb"
+        - name: MYSQL_USER
+          value: "postuser"
+        - name: MYSQL_PASSWORD
+          value: "postpassword"
+      volumes:
+        - name: post-db-storage
+          persistentVolumeClaim:
+            claimName: post-db-storage
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweetit-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweetit-app
+  template:
+    metadata:
+      labels:
+        app: tweetit-app
+    spec:
+      containers:
+      - name: tweetit-web
+        image: k8s/tweetit
+        ports:
+        - containerPort: 80
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+  - name: rabbitmq
+    port: 5672
+    targetPort: 5672
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: account-db-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: post-db-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: post-service
+  template:
+    metadata:
+      labels:
+        app: post-service
+    spec:
+      containers:
+      - name: post-service
+        image: k8s/post_service
+        ports:
+        - containerPort: 80
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: account-service
+  template:
+    metadata:
+      labels:
+        app: account-service
+    spec:
+      containers:
+      - name: account-service
+        image: k8s/account_service:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: RABBITMQ_HOST
+          value: "rabbitmq"
+      volumes:
+        - name: rabbitmq-config
+          configMap:
+            name: rabbitmq
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq
+data:
+  RABBITMQ_HOST: "rabbitmq"

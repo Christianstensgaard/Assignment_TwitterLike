@@ -23,6 +23,24 @@
           "Port": 80
         }
       ]
+    },
+    {
+      "UpstreamPathTemplate": "/account/create",
+      "UpstreamHttpMethod": ["Post"],
+      "DownstreamPathTemplate": "",
+      "DownstreamScheme": "",
+      "DownstreamHostAndPorts": [],
+      "Name": "AccountRouter",
+      "CircuitBreakerOptions": {
+        "breakThreshold": 5,
+        "failureThreshold": 3
+      },
+      "RateLimiterOptions": {
+        "maxCallsPerSecond": 10,
+        "permitList": [
+          "tweetIt" 
+        ]
+      }
     }
   ]
 }
