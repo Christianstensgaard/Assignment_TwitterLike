@@ -1,7 +1,6 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RabbitMqDefault;
 
@@ -38,9 +37,9 @@ public class RMQ_Send : IDisposable
 
     public async Task<string> SendAndAwaitResponseAsync(TimeSpan timeout)
     {
-      Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>();
+      // Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>();
+      // byte[] outputStream = sidecar.Get().Encrypt(Body);
       
-      byte[] outputStream = sidecar.Get().Encrypt(Body);
       var replyQueueName = channel.QueueDeclare().QueueName;
       var consumer = new EventingBasicConsumer(channel);
       var tcs = new TaskCompletionSource<string>();
@@ -61,7 +60,7 @@ public class RMQ_Send : IDisposable
       props.CorrelationId = correlationId;
       props.ReplyTo = replyQueueName;
 
-      channel.BasicPublish(exchangeName, RoutingKey, props, outputStream);
+      channel.BasicPublish(exchangeName, RoutingKey, props, Body);
 
       using var cts = new CancellationTokenSource(timeout);
       cts.Token.Register(() => tcs.TrySetCanceled(), useSynchronizationContext: false);

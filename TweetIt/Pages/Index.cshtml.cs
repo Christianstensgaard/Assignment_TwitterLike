@@ -14,31 +14,25 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         ServerResponse = null;
-        RequestModel = new RM(); // Initialize RequestModel
+        RequestModel = new RM();
     }
 
     public void OnPost()
     {
-        // Ensure Action and Payload are provided
         if (string.IsNullOrWhiteSpace(RequestModel?.Action) || string.IsNullOrWhiteSpace(RequestModel?.Payload))
         {
             ServerResponse = "Error: Action or Payload cannot be empty.";
             return;
         }
 
-        // Construct the JSON based on input values
         var jsonInput = new { action = RequestModel.Action, payload = RequestModel.Payload };
         var jsonString = JsonSerializer.Serialize(jsonInput);
 
         try
         {
-            // Log the raw JSON for debugging
             Console.WriteLine($"Generated JSON: {jsonString}");
-
-            // Deserialize the JSON back into the model for validation
             var parsedJson = JsonSerializer.Deserialize<RM>(jsonString);
 
-            // Provide feedback
             if (parsedJson != null)
             {
                 ServerResponse = $"JSON received successfully! Action: {parsedJson.Action}, Payload: {parsedJson.Payload}";
@@ -51,6 +45,7 @@ public class IndexModel : PageModel
                     case "account":
                         System.Console.WriteLine("Running Account Service Handler!");
                         payload = parsedJson.Payload.Split(',');
+                        System.Console.WriteLine("Payload: " + payload);
                         new AccountController().CreateAccount(payload[0], payload[1]);
                     break;
 
@@ -60,7 +55,6 @@ public class IndexModel : PageModel
                         if(payload.Length >=3)
                           new PostController().Createpost(payload[0], payload[1], payload[2]);
                     break;
-
 
 
                     default:

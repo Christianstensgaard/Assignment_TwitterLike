@@ -34,7 +34,7 @@ public class RMQ_Recieve : IDisposable
         Sidecar<EncryptionSidecar> sidecar = new Sidecar<EncryptionSidecar>();
 
         var body = arg.Body.ToArray();
-        byte[] response = sidecar.Get().Decrypt(handleMessage(body));
+        // byte[] response = sidecar.Get().Decrypt(handleMessage(body));
 
         if (arg.BasicProperties?.ReplyTo != null){
           var replyProps = channel.CreateBasicProperties();
@@ -43,7 +43,7 @@ public class RMQ_Recieve : IDisposable
             exchange: "",
             routingKey: arg.BasicProperties.ReplyTo,
             basicProperties: replyProps,
-            body: response);
+            body: handleMessage(body));
         }
         channel.BasicAck(deliveryTag: arg.DeliveryTag, multiple: false);
       }
