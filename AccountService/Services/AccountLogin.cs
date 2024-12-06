@@ -17,10 +17,11 @@ public class AccountLogin : AService
   public override ServiceState OnInvoke(byte[] stream)
   {
     //- Using CSV, just for simplicity. 
-    string[] strings = Encoding.UTF8.GetString(stream).Split(',');
-
-    System.Console.WriteLine(strings[0]);
-    System.Console.WriteLine(strings[1]);
+    /*
+      * Log the use in, and return a token or what ever you normally do on a web site.
+      * 
+      * I have not created a lot of the services, and they are here for demo only.
+    */
 
     return ServiceState.Ok;
   }

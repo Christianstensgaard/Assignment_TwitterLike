@@ -22,8 +22,6 @@ public class CreateAccount: AService{
     //- This is called when the message broker has been called!
     //- stream is the message from the broker -> caller.
     System.Console.WriteLine("Creating Account Invoked!");
-
-
     string[] strings = Encoding.UTF8.GetString(stream).Split(",");
 
     if(strings.Length < 2)
@@ -58,7 +56,4 @@ public class CreateAccount: AService{
   }
 
   public MySqlDatabase database { get; set; }
-
-
-
 }

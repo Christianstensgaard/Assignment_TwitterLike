@@ -16,5 +16,10 @@ public class AccountValidation : AService
   public override ServiceState OnInvoke(byte[] stream)
   {
     return ServiceState.Ok;
+
+    /*
+      * Validate the user, checking if the mail / username is already in use. 
+      * 
+    */
   }
 }
