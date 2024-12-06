@@ -20,9 +20,22 @@ the image display how, the system i designed to handle client requests. on the i
 this way, the system is better suited for performance and at the same time isolated from the client. making the system more secure.
 
 
+
+
+
 ## 2. Update
 Nothing really changes on my system architecture diagram. Since i'm using an other communication protocol between the services, i need to have a layer to translate the user request to a format the services understand, and vice versa.
 ![C4 - drawing](./img/api_gateway.svg)
+
+If I were to build on top of the system and needed to add a gateway, I would approach it like this:
+![image](/docs/img/secdiagram_createaccount.png)
+Setting the project aside for now, I’ve attempted to make it work but encountered some challenges. To illustrate my idea, here’s a sequence diagram showing how I envisioned it could function.
+
+By using this method, I could incorporate a gateway into the services, enabling them to connect and handle more complex tasks within the system.
+
+
+
+
 
 
 ## 3. Implement
@@ -101,6 +114,9 @@ therefore i will use a combination of the Circuit breaker, and the RabbitMQ to h
 
 
 
+
+
+
 ## Solution
 *Using the Circuit-breaker design patten together with the RMQ_Send class i can create a api call, with fallback mechanism*
 ![code snippet](./img/api_gateway_1.png)
@@ -164,7 +180,7 @@ this way we remove a lot of overhead, and only use the Json file as a raw text o
 
 
 ## Ocelot
-even tho i've done something else, i tried to make use of ocelot inside the system to demonstrate the use of the web-technology's we're using doing the class. 
+even tho i've done something else, i tried to make use of ocelot inside the system to demonstrate the use of the web-technology's we're using doing the class.
 
 ```json
 {

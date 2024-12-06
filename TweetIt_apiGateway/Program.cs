@@ -36,34 +36,5 @@ app.MapPost("/account/create", async (string accountname, string passHash) => {
   });
   return Results.Ok(returnMessage);
 });
-app.MapPost("/account/login", async (string accountname, string passHash) => {
-  string msg = "Result: ";
-  CircuitBreaker circuitBreaker = new CircuitBreaker(5, TimeSpan.FromSeconds(3));
-  await circuitBreaker.ExecuteAsync(async () =>
-  {
-    msg += "Ok!";
-  },
-  onFallback: () =>
-  {
-    msg += "Error!";
-  });
-  return Results.Ok(msg);
-}).WithName("Account login").WithOpenApi();
 
-app.MapPost("/account/logout", async (string accountname, string passHash) => {
-  CircuitBreaker circuitBreaker = new CircuitBreaker(5, TimeSpan.FromSeconds(3));
-  await circuitBreaker.ExecuteAsync(async () =>
-  {
-
-    
-  },
-  onFallback: () =>
-  {
-
-  });
-  return Results.Ok();
-}).WithName("Account logout").WithOpenApi();
-app.MapGet("/", ()=>{
-  return Results.Ok();
-});
 app.Run();
